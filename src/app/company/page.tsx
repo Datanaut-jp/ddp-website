@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { ScrollAnimation } from '@/components/common/ScrollAnimation';
+import type { ReactNode } from 'react'; // ← ReactNodeの型をインポート
 
 // PageHeaderコンポーネント（変更なし）
 const PageHeader = () => (
@@ -27,17 +28,25 @@ const PageHeader = () => (
   </div>
 );
 
-// ProfileTableコンポーネント（変更なし）
+// ProfileTableコンポーネント
 const ProfileTable = () => {
-  const profileItems = [
+  // ↓↓↓ descriptionの型を、ReactNodeに変更しました ↓↓↓
+  const profileItems: { term: string; description: ReactNode }[] = [
     { term: '商号', description: 'Datanaut' },
-    { term: '設立', description: '[設立日]' },
-    { term: '代表者', description: '[代表者名]' },
-    { term: '所在地', description: '[会社の所在地]' },
+    { term: '設立', description: '2025年6月14日' },
+    { term: '代表者', description: '藤本 和海' },
+    { term: '所在地', description: '東京都渋谷区桜丘町26-1 セルリアンタワー15F' },
     {
       term: '事業内容',
-      description:
-        'データとAI活用支援、業務効率化・DX推進支援、補助金・助成金活用コンサルティング',
+      description: (
+        <>
+          データとAI活用支援
+          <br />
+          業務効率化・DX推進支援
+          <br />
+          補助金・助成金活用コンサルティング
+        </>
+      ),
     },
   ];
 
@@ -47,7 +56,7 @@ const ProfileTable = () => {
         {profileItems.map((item) => (
           <div className="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4" key={item.term}>
             <dt className="text-base font-medium text-gray-900">{item.term}</dt>
-            <dd className="mt-1 text-base leading-7 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd className="mt-1 text-base leading-7 text-gray-600 sm:col-span-2 sm:mt-0">
               {item.description}
             </dd>
           </div>
@@ -57,44 +66,44 @@ const ProfileTable = () => {
   );
 };
 
-// CompanyPage本体（ProfileTableの配置場所を変更）
+
+// CompanyPage本体（変更なし）
 export default function CompanyPage() {
   return (
-    <div className="bg-gray-50">
+    <div>
       <PageHeader />
-      <div className="py-16 sm:py-24">
-        <div className="container mx-auto max-w-5xl px-4">
-          {/* ご挨拶セクション */}
+      
+      <section aria-labelledby="greeting-heading" className="bg-gradient-to-r from-white to-blue-50 py-24 sm:py-32">
+        <div className="container mx-auto max-w-4xl px-4">
           <ScrollAnimation>
-            <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
-              <div className="md:col-span-1">
-                <div className="relative h-40 w-40 overflow-hidden rounded-full mx-auto md:mx-0">
-                  <Image src="/images/ceo.jpg" alt="代表者プロフィール写真" fill className="object-cover" quality={90}/>
-                </div>
-                <div className="mt-4 text-center md:text-left">
-                  <h3 className="text-lg font-semibold text-gray-900">[代表者名]</h3>
-                  <p className="text-sm text-gray-500">代表取締役</p>
-                </div>
-              </div>
-              <div className="md:col-span-2">
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900">
-                  ご挨拶
-                </h2>
-                <p className="mt-6 text-lg leading-8 text-gray-600">
-                  [ここにご挨拶文が入ります。Datanautのミッションや、お客様への想いなどを記載します。]
-                </p>
-              </div>
+            <div className="text-center">
+              <h2 id="greeting-heading" className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                ご挨拶
+              </h2>
+              <p className="mt-6 text-xl leading-9 text-gray-700">
+                この度、株式会社Datanautを設立いたしました。
+                <br />
+                データとAIの力で、お客様の事業成長を支援します。
+                <br />
+                未来を拓く航海を、共に。
+              </p>
             </div>
           </ScrollAnimation>
+        </div>
+      </section>
 
-          {/* 会社情報セクション（グリッドの外に配置） */}
+      <section aria-labelledby="profile-heading" className="bg-white py-16 sm:py-24">
+        <div className="container mx-auto max-w-5xl px-4">
           <ScrollAnimation>
-            <div className="mt-16 sm:mt-24">
+            <div>
+              <h2 id="profile-heading" className="text-3xl font-bold tracking-tight text-gray-900 text-center">
+                会社情報
+              </h2>
               <ProfileTable />
             </div>
           </ScrollAnimation>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
