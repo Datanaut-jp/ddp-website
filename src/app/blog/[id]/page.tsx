@@ -4,7 +4,7 @@ import { client } from '@/libs/microcms';
 import { format } from 'date-fns';
 import parse from 'html-react-parser';
 
-// microCMSの型定義（変更なし）
+// microCMSの型定義
 type Post = {
   id: string;
   title: string;
@@ -24,34 +24,22 @@ type Props = {
   };
 };
 
-// 【ここを追加】ビルド時に静的なページを生成するための関数
-export async function generateStaticParams() {
-  const data = await client.get({
-    endpoint: 'blog',
-    queries: { fields: 'id' },
-  });
-
-  const paths = data.contents.map((content: { id: string }) => ({
-    id: content.id,
-  }));
-
-  return [...paths];
-}
-
-
-// 記事詳細ページ
-export default async function PostPage({ params }: Props) {
-  const postId = params.id;
-  
-  let post: Post;
+// データを取得する非同期関数
+async function getPost(postId: string) {
   try {
-    post = await client.get({
+    const post = await client.get<Post>({
       endpoint: 'blog',
       contentId: postId,
     });
+    return post;
   } catch {
     notFound();
   }
+}
+
+// ページ本体（ここからasyncを外します）
+export default async function PostPage({ params }: Props) {
+  const post = await getPost(params.id);
 
   return (
     <div className="bg-white py-12 sm:py-16">
@@ -82,10 +70,24 @@ export default async function PostPage({ params }: Props) {
           )}
         </div>
 
-        <div className="prose prose-lg mt-12 max-w-none prose-invert dark:prose-invert">
+        <div className="prose prose-lg mt-12 max-w-none">
           {parse(post.content)}
         </div>
       </div>
     </div>
   );
+}
+
+// generateStaticParamsも必要なので残します
+export async function generateStaticParams() {
+  const data = await client.get({
+    endpoint: 'blog',
+    queries: { fields: 'id' },
+  });
+
+  const paths = data.contents.map((content: { id: string }) => ({
+    id: content.id,
+  }));
+
+  return [...paths];
 }
