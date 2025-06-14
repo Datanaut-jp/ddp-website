@@ -1,37 +1,38 @@
-import { notFound } from 'next/navigation';
-import Image from 'next/image';
-import { client } from '@/libs/microcms';
-import { format } from 'date-fns';
-import parse from 'html-react-parser';
+import { notFound } from 'next/navigation'
+import Image from 'next/image'
+import { client } from '@/libs/microcms'
+import { format } from 'date-fns'
+import parse from 'html-react-parser'
 
 // microCMSの型定義
 type Post = {
-  id: string;
-  title: string;
-  content: string; // 本文の型
-  category?: { name: string };
-  publishedAt?: string;
+  id: string
+  title: string
+  content: string // 本文の型
+  category?: { name: string }
+  publishedAt?: string
   eyecatch?: {
-    url: string;
-    height: number;
-    width: number;
-  };
-};
+    url: string
+    height: number
+    width: number
+  }
+}
 
 // 記事詳細ページ
 export default async function PostPage({ params }: { params: { id: string } }) {
-  const postId = params.id;
-  
-  let post: Post;
+  const postId = params.id
+
+  let post: Post
   try {
     // URLのIDを元に、microCMSから特定の記事データを1件取得
     post = await client.get({
       endpoint: 'blog',
       contentId: postId,
-    });
-  } catch (error) {
+    })
+  } catch (_error) {
+    // "error" の前にアンダースコアを追加
     // 記事が見つからない場合は404ページを表示
-    notFound();
+    notFound()
   }
 
   return (
@@ -71,5 +72,5 @@ export default async function PostPage({ params }: { params: { id: string } }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
