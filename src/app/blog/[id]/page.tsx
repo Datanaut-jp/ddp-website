@@ -18,15 +18,29 @@ type Post = {
   };
 };
 
-// ↓↓↓ ページのPropsの型を、より正確に定義します ↓↓↓
 type Props = {
   params: {
     id: string;
   };
 };
 
+// 【ここを追加】ビルド時に静的なページを生成するための関数
+export async function generateStaticParams() {
+  const data = await client.get({
+    endpoint: 'blog',
+    queries: { fields: 'id' },
+  });
+
+  const paths = data.contents.map((content: { id: string }) => ({
+    id: content.id,
+  }));
+
+  return [...paths];
+}
+
+
 // 記事詳細ページ
-export default async function PostPage({ params }: Props) { // ← ここで定義したProps型を使います
+export default async function PostPage({ params }: Props) {
   const postId = params.id;
   
   let post: Post;
@@ -68,7 +82,6 @@ export default async function PostPage({ params }: Props) { // ← ここで定�
           )}
         </div>
 
-        {/* 本文（prose-invert dark:prose-invert を追加してダークモードでも読みやすく） */}
         <div className="prose prose-lg mt-12 max-w-none prose-invert dark:prose-invert">
           {parse(post.content)}
         </div>
