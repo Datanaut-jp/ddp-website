@@ -8,11 +8,16 @@ const inter = Inter({ subsets: ['latin'] })
 
 // サイトのタイトルと説明を「Datanaut」ブランドに更新
 export const metadata: Metadata = {
-  title: 'Datanaut | データの宇宙に、地図と航路を。',
-  description: 'Datanautは、データとAIの活用を強みとする、中小企業・個人事業主向けの経営コンサルティング会社です。',
+  title: 'Datanaut | データ宇宙の航海士たち',
+  description:
+    'Datanautは、データとAIの活用を強みとする、中小企業・個人事業主向けの経営コンサルティング会社です。',
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="ja">
       <body className={inter.className}>
