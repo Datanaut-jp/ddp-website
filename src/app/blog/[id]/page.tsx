@@ -1,43 +1,47 @@
-import { notFound } from 'next/navigation'
-import Image from 'next/image'
-import { client } from '@/libs/microcms'
-import { format } from 'date-fns'
-import parse from 'html-react-parser'
+import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import { client } from '@/libs/microcms';
+import { format } from 'date-fns';
+import parse from 'html-react-parser';
 
-// microCMSの型定義
+// microCMSの型定義（変更なし）
 type Post = {
-  id: string
-  title: string
-  content: string // 本文の型
-  category?: { name: string }
-  publishedAt?: string
+  id: string;
+  title: string;
+  content: string;
+  category?: { name: string };
+  publishedAt?: string;
   eyecatch?: {
-    url: string
-    height: number
-    width: number
-  }
-}
+    url: string;
+    height: number;
+    width: number;
+  };
+};
+
+// ↓↓↓ ページのPropsの型を、より正確に定義します ↓↓↓
+type Props = {
+  params: {
+    id: string;
+  };
+};
 
 // 記事詳細ページ
-export default async function PostPage({ params }: { params: { id: string } }) {
-  const postId = params.id
-
-  let post: Post
+export default async function PostPage({ params }: Props) { // ← ここで定義したProps型を使います
+  const postId = params.id;
+  
+  let post: Post;
   try {
-    // URLのIDを元に、microCMSから特定の記事データを1件取得
     post = await client.get({
       endpoint: 'blog',
       contentId: postId,
-    })
-  } catch { // 変数(_error)自体を削除
-    // 記事が見つからない場合は404ページを表示
+    });
+  } catch {
     notFound();
   }
 
   return (
     <div className="bg-white py-12 sm:py-16">
       <div className="container mx-auto max-w-3xl px-4">
-        {/* アイキャッチ画像 */}
         {post.eyecatch && (
           <div className="relative mb-8 aspect-video w-full">
             <Image
@@ -51,7 +55,6 @@ export default async function PostPage({ params }: { params: { id: string } }) {
           </div>
         )}
 
-        {/* タイトルとメタ情報 */}
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           {post.title}
         </h1>
@@ -65,11 +68,11 @@ export default async function PostPage({ params }: { params: { id: string } }) {
           )}
         </div>
 
-        {/* 本文 */}
-        <div className="prose prose-lg mt-12 max-w-none">
+        {/* 本文（prose-invert dark:prose-invert を追加してダークモードでも読みやすく） */}
+        <div className="prose prose-lg mt-12 max-w-none prose-invert dark:prose-invert">
           {parse(post.content)}
         </div>
       </div>
     </div>
-  )
+  );
 }
