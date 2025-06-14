@@ -9,11 +9,6 @@ const nextConfig = {
         port: '',
         pathname: '/assets/**',
       },
-      //ここから下は画像が決まり次第削除
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
     ],
   },
 }
