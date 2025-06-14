@@ -29,10 +29,9 @@ export default async function PostPage({ params }: { params: { id: string } }) {
       endpoint: 'blog',
       contentId: postId,
     })
-  } catch (_error) {
-    // "error" の前にアンダースコアを追加
+  } catch { // 変数(_error)自体を削除
     // 記事が見つからない場合は404ページを表示
-    notFound()
+    notFound();
   }
 
   return (
