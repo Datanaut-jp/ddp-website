@@ -35,7 +35,7 @@ const ProfileTable = () => {
     { term: '商号', description: 'Datanaut' },
     { term: '設立', description: '2025年6月14日' },
     { term: '代表者', description: '藤本 和海' },
-    { term: '所在地', description: '東京都渋谷区桜丘町26-1 セルリアンタワー15F' },
+    { term: '所在地', description: '東京都渋谷区' },
     {
       term: '事業内容',
       description: (
