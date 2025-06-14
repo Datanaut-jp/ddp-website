@@ -1,34 +1,23 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-// ヘッダーとフッターをインポートします
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
+// サイトのタイトルと説明を「Datanaut」ブランドに更新
 export const metadata: Metadata = {
-  title: 'Data Drive Partners',
-  description: 'データとAIで、経営の未来をデザインする。',
+  title: 'Datanaut | データの宇宙に、地図と航路を。',
+  description: 'Datanautは、データとAIの活用を強みとする、中小企業・個人事業主向けの経営コンサルティング会社です。',
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
       <body className={inter.className}>
-        {/* Headerコンポーネントをbodyの直下に配置 */}
         <Header />
-
-        {/* children（各ページの本体）をmainタグで囲む */}
-        <main className="min-h-screen">
-          {children}
-        </main>
-
-        {/* Footerコンポーネントをmainの後、bodyの閉じる直前に配置 */}
+        <main className="min-h-screen">{children}</main>
         <Footer />
       </body>
     </html>

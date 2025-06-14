@@ -17,9 +17,9 @@ export const Footer = () => {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {/* ロゴと会社名 */}
           <div className="space-y-2">
-            <h2 className="text-xl font-bold">Data Drive Partners</h2>
+            <h2 className="text-xl font-bold">Datanaut</h2>
             <p className="text-sm text-gray-400">
-              データとAIで、経営の未来をデザインする。
+              -データ宇宙の航海士たち-
             </p>
           </div>
 
@@ -70,7 +70,7 @@ export const Footer = () => {
 
         {/* コピーライト */}
         <div className="mt-8 border-t border-gray-700 pt-4 text-center text-sm text-gray-500">
-          <p>&copy; {currentYear} Data Drive Partners. All Rights Reserved.</p>
+          <p>&copy; {currentYear} Datanaut. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
