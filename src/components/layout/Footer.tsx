@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 const footerLinks = [
@@ -17,15 +18,18 @@ export const Footer = () => {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {/* ロゴと会社名 */}
           <div className="space-y-2">
-            <h2 className="text-xl font-bold">Datanaut</h2>
-            <p className="text-sm text-gray-400">
-              -データ宇宙の航海士たち-
-            </p>
+            <Image
+              src="/images/logo-full-white.svg"
+              alt="Datanaut ロゴ"
+              width={160}
+              height={36}
+            />
+            <p className="text-sm text-gray-400">-データ宇宙の航海士たち-</p>
           </div>
 
           {/* サイトマップ */}
           <div>
-            <h3 className="font-semibold uppercase tracking-wider text-gray-300">
+            <h3 className="font-semibold tracking-wider text-gray-300 uppercase">
               Menu
             </h3>
             <ul className="mt-4 space-y-2">
@@ -44,7 +48,7 @@ export const Footer = () => {
 
           {/* その他リンク（仮） */}
           <div>
-            <h3 className="font-semibold uppercase tracking-wider text-gray-300">
+            <h3 className="font-semibold tracking-wider text-gray-300 uppercase">
               Support
             </h3>
             <ul className="mt-4 space-y-2">

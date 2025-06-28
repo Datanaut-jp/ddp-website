@@ -12,8 +12,12 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'Datanaut | データの宇宙に、地図と航路を。',
-  description:
-    'Datanautは、データとAIの活用を強みとする、中小企業・個人事業主向けの経営コンサルティング会社です。',
+  description: 'Datanautは、データとAIの活用を強みとする、中小企業・個人事業主向けの経営コンサルティング会社です。',
+  // ↓↓↓ このiconsオブジェクトを追加します ↓↓↓
+  icons: {
+    icon: '/images/favicon.png', // 通常のファビコン
+    apple: '/images/apple-icon.png', // Appleデバイス用
+  },
 }
 
 export default function RootLayout({
