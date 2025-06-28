@@ -1,7 +1,7 @@
-import Link from 'next/link'
-import { ScrollAnimation } from '@/components/common/ScrollAnimation'
+import Link from 'next/link';
+import { ScrollAnimation } from '@/components/common/ScrollAnimation';
 
-// ページヘッダー用のコンポーネント
+// PageHeaderコンポーネント（変更なし）
 const PageHeader = () => (
   <div className="bg-gray-50 py-16 sm:py-24">
     <div className="container mx-auto max-w-5xl px-4 text-center">
@@ -13,21 +13,29 @@ const PageHeader = () => (
       </p>
     </div>
   </div>
-)
+);
 
-// 各サービスセクション用のコンポーネント
-const ServiceSection = ({ title, children }: { title: string, children: React.ReactNode }) => (
+// 各サービスセクション用のコンポーネント（ホバーアニメーションを更新）
+const ServiceSection = ({ title, href, children }: { title: string, href: string, children: React.ReactNode }) => (
   <ScrollAnimation>
     <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
       <div className="md:col-span-1">
-        <h2 className="text-2xl font-bold text-blue-600">{title}</h2>
+        <Link href={href} className="group inline-flex items-center gap-x-3">
+          {/* ↓↓↓ 新しいCSSクラスを追加し、不要なクラスを削除しました ↓↓↓ */}
+          <h2 className="link-underline text-2xl font-black text-blue-600 transition-colors duration-300 ease-out group-hover:text-blue-700">
+            {title}
+          </h2>
+          <span className="text-blue-600 opacity-0 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-x-2">
+            →
+          </span>
+        </Link>
       </div>
       <div className="md:col-span-2 space-y-4 text-lg text-gray-700">
         {children}
       </div>
     </div>
   </ScrollAnimation>
-)
+);
 
 export default function ServicePage() {
   return (
@@ -37,8 +45,7 @@ export default function ServicePage() {
       <div className="py-16 sm:py-24">
         <div className="container mx-auto max-w-5xl px-4 space-y-16">
 
-          {/* サービス1：DX推進支援 */}
-          <ServiceSection title="業務効率化とDX推進支援">
+          <ServiceSection title="業務効率化とDX推進支援" href="/service/dx-support">
             <p>
               SFA（営業支援）やMA（マーケティング自動化）といったITツールについて、その価値や適切な活用法を分かりやすくお伝えし、選定から導入、定着までをワンストップで支援します。
             </p>
@@ -47,11 +54,9 @@ export default function ServicePage() {
             </p>
           </ServiceSection>
 
-          {/* 区切り線 */}
           <div className="border-b border-gray-200"></div>
 
-          {/* サービス2：補助金・助成金活用 */}
-          <ServiceSection title="中小企業診断士事務所">
+          <ServiceSection title="中小企業診断士事務所" href="/service/sme-consultant">
             <p>
               IT導入やDX推進に際し、まだ広く知られていない制度も含めて、お客様が活用できる最適な補助金・助成金をご提案します。
             </p>
@@ -63,7 +68,6 @@ export default function ServicePage() {
         </div>
       </div>
 
-      {/* CTAセクション */}
       <ScrollAnimation>
         <div className="bg-blue-50">
           <div className="container mx-auto max-w-4xl px-4 py-16 text-center sm:py-20">

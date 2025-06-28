@@ -117,3 +117,24 @@ body {
 .slide-in-right.is-inview {
   animation: slide-in-right 1s ease-out forwards;
 }
+
+/* ホバー時にグラデーションのアンダーラインを表示するアニメーション */
+.link-underline {
+  position: relative;
+  display: inline-block; /* インライン要素にしないと下線が正しく表示されないため */
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; /* テキストからの距離 */
+  left: 0;
+  width: 0; /* 初期状態では幅0（見えない） */
+  height: 2px; /* 線の太さ */
+  background: linear-gradient(to right, #3b82f6, #06b6d4); /* 青からシアンへのグラデーション */
+  transition: width 0.3s ease-out; /* 幅が0.3秒かけて変化する */
+}
+
+.link-underline:hover::after {
+  width: 100%; /* ホバー時に幅100%（線が表示される） */
+}

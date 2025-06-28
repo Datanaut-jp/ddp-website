@@ -4,20 +4,23 @@ import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 
-const inter = Inter({ subsets: ['latin'] })
+// ↓↓↓ このInter()の中にweightプロパティを追加しました ↓↓↓
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'], // 使用するフォントの太さを指定
+})
 
-// サイトのタイトルと説明を「Datanaut」ブランドに更新
 export const metadata: Metadata = {
-  title: 'Datanaut | データ宇宙の航海士たち',
+  title: 'Datanaut | データの宇宙に、地図と航路を。',
   description:
     'Datanautは、データとAIの活用を強みとする、中小企業・個人事業主向けの経営コンサルティング会社です。',
 }
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   return (
     <html lang="ja">
       <body className={inter.className}>
