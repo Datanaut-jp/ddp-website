@@ -51,7 +51,7 @@ export default function ServicePage() {
           <div className="border-b border-gray-200"></div>
 
           {/* サービス2：補助金・助成金活用 */}
-          <ServiceSection title="補助金・助成金活用コンサルティング">
+          <ServiceSection title="中小企業診断士事務所">
             <p>
               IT導入やDX推進に際し、まだ広く知られていない制度も含めて、お客様が活用できる最適な補助金・助成金をご提案します。
             </p>

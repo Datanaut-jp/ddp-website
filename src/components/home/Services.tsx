@@ -29,7 +29,7 @@ export const Services = () => {
           <ServiceCard title="業務効率化とDX推進支援">
             SFAやMAといったITツールの価値を分かりやすくお伝えし、選定から導入、定着までをワンストップで支援。抜本的な業務効率化を実現します。
           </ServiceCard>
-          <ServiceCard title="補助金・助成金活用コンサルティング">
+          <ServiceCard title="中小企業診断士事務所">
             IT導入やDX推進に活用できる最適な補助金・助成金をご提案。複雑な申請手続きも専門家としてサポートし、お客様の投資負担を軽減します。
           </ServiceCard>
         </div>
