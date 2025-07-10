@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import { ScrollAnimation } from '@/components/common/ScrollAnimation';
-import type { ReactNode } from 'react'; // ← ReactNodeの型をインポート
+import type { ReactNode } from 'react';
 
-// PageHeaderコンポーネント（変更なし）
 const PageHeader = () => (
   <div className="relative bg-gray-900">
     <div className="absolute inset-0">
@@ -18,36 +17,28 @@ const PageHeader = () => (
     <div className="relative isolate py-16 sm:py-24">
       <div className="container mx-auto max-w-5xl px-4 text-center">
         <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-          会社概要
+          About Us
         </h1>
         <p className="mt-4 text-xl text-gray-300">
-          Datanautの基本情報をご紹介します。
+          Datanautの基本情報と、私たちの想いをご紹介します。
         </p>
       </div>
     </div>
   </div>
 );
 
-// ProfileTableコンポーネント
 const ProfileTable = () => {
-  // ↓↓↓ descriptionの型を、ReactNodeに変更しました ↓↓↓
   const profileItems: { term: string; description: ReactNode }[] = [
-    { term: '商号', description: 'Datanaut' },
-    { term: '設立', description: '2025年6月14日' },
-    { term: '代表者', description: '藤本 和海' },
-    { term: '所在地', description: '東京都渋谷区' },
-    {
-      term: '事業内容',
-      description: (
-        <>
-          データとAI活用支援
-          <br />
-          業務効率化・DX推進支援
-          <br />
-          中小企業診断士事務所
-        </>
-      ),
-    },
+    { term: '会社名（商号）', description: '株式会社datanaut' },
+    { term: '設立年月日', description: 'YYYY年MM月DD日' },
+    { term: '代表者', description: '代表取締役 藤本 和海' },
+    { term: '所在地', description: '〒XXX-XXXX 東京都〇〇区〇〇 X-X-X 〇〇ビルX階' },
+    { term: '役員構成', description: '取締役 〇〇 〇〇' },
+    { term: '資本金', description: 'X,XXX,XXX円' },
+    { term: '連絡先', description: 'TEL: XX-XXXX-XXXX / FAX: XX-XXXX-XXXX' },
+    { term: 'ウェブサイトURL', description: 'https://www.datanaut.jp' }, // 仮
+    { term: '取引銀行', description: '〇〇銀行 〇〇支店' },
+    { term: '許認可・登録', description: 'プライバシーマーク登録番号：第XXXXXXXX号' },
   ];
 
   return (
@@ -67,40 +58,43 @@ const ProfileTable = () => {
 };
 
 
-// CompanyPage本体（変更なし）
 export default function CompanyPage() {
   return (
     <div>
       <PageHeader />
       
-      <section aria-labelledby="greeting-heading" className="bg-gradient-to-r from-white to-blue-50 py-24 sm:py-32">
+      <section className="bg-gradient-to-r from-white to-blue-50 py-24 sm:py-32">
         <div className="container mx-auto max-w-4xl px-4">
           <ScrollAnimation>
             <div className="text-center">
-              <h2 id="greeting-heading" className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                ご挨拶
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                データで、未来の羅針盤を創る。
               </h2>
-              <p className="mt-6 text-xl leading-9 text-gray-700">
-                この度、株式会社Datanautを設立いたしました。
-                <br />
-                データとAIの力で、お客様の事業成長を支援します。
-                <br />
-                未来を拓く航海を、共に。
-              </p>
+              <div className="mt-8 text-lg leading-9 text-gray-700 text-left space-y-6">
+                <p>株式会社datanautのウェブサイトへお越しいただき、誠にありがとうございます。</p>
+                <p>代表取締役の藤本 和海です。</p>
+                <p>情報が溢れる現代社会。多くの企業が、膨大なデータという宝の山を前に、その活用法を見出せずにいます。私たちは、この状況に風穴を開け、データが持つ無限の可能性を解放したい。その一つの熱い想いを原動力に、株式会社datanautを創業いたしました。</p>
+                <p>私たちの使命は、単なるデータ分析ではありません。ビジネスという予測不能な大海原を航海するすべての挑戦者へ、「データという、最高精度の羅針盤を提供する」こと。それが私たちの存在意義であると確信しています。</p>
+                <p>勘や経験だけに頼るのではなく、客観的なデータに基づいた確かな一手で未来を切り拓く。そのために私たちは、お客様一社一社の課題に深く、熱く、寄り添うコンサルティングに全力を注いでいます。それは単なるツール提供ではなく、お客様のビジョンを共有し、成功という目的地まで共に汗をかく「パートナー」としての挑戦です。</p>
+                <p>データが指し示す先には、私たちがまだ見ぬビジネスチャンスが、そして想像するだけでワクワクするような未来が広がっています。私たちはデータの力で人と企業のポテンシャルを最大化し、誰もが自信を持って未来へ一歩を踏み出せる社会を創造します。</p>
+                <p>この情熱を胸に、私たちは挑戦を止めません。常識を打ち破り、未来を切り拓くdatanautの航海に、どうぞご期待ください。今後とも、皆様の変わらぬご支援とご指導を賜りますよう、心よりお願い申し上げます。</p>
+                <div className="pt-6 text-right">
+                  <p>株式会社datanaut</p>
+                  <p>代表取締役　藤本 和海</p>
+                </div>
+              </div>
             </div>
           </ScrollAnimation>
         </div>
       </section>
 
-      <section aria-labelledby="profile-heading" className="bg-white py-16 sm:py-24">
+      <section className="bg-white py-16 sm:py-24">
         <div className="container mx-auto max-w-5xl px-4">
           <ScrollAnimation>
-            <div>
-              <h2 id="profile-heading" className="text-3xl font-bold tracking-tight text-gray-900 text-center">
-                会社情報
-              </h2>
-              <ProfileTable />
-            </div>
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 text-center">
+              会社情報
+            </h2>
+            <ProfileTable />
           </ScrollAnimation>
         </div>
       </section>
