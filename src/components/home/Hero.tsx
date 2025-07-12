@@ -1,4 +1,4 @@
-import Image from 'next/image'; // Imageコンポーネントをインポート
+import Image from 'next/image';
 
 export const Hero = () => {
   return (
@@ -6,26 +6,32 @@ export const Hero = () => {
       {/* 背景画像 */}
       <div className="absolute inset-0">
         <Image
-          // ↓↓↓ ここをローカルの画像パスに変更しました ↓↓↓
-          src="/images/hero-background.jpg" 
-          alt="Datanautのヒーローセクション背景"
+          src="/images/hero-background.jpg"
+          alt="Data network abstract background"
           fill
           className="object-cover"
-          priority 
+          priority
           quality={90}
         />
-        {/* 画像の上に半透明の黒いオーバーレイを重ねて、文字を読みやすくします */}
-        <div className="absolute inset-0 bg-black opacity-30"></div>
+        <div className="absolute inset-0 bg-black opacity-50"></div>
       </div>
 
       {/* テキストとボタンのコンテンツ */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center text-center">
-        <h1 className="text-4xl font-bold tracking-tight md:text-6xl animate-fade-in delay-500">
+        {/* ▼▼▼ ご指示に合わせてこのh1タグを修正しました ▼▼▼ */}
+        <h1 
+          className="text-4xl font-semibold tracking-widest md:text-5xl"
+          style={{ transform: 'scale(0.85)' }}
+        >
           Charting your data universe.
         </h1>
-        <p className="mt-4 text-lg text-blue-200">
+
+        {/* ▼▼▼ ご指示に合わせてこのpタグを修正しました ▼▼▼ */}
+        <p className="mt-4 text-lg text-white">
           データの宇宙に、地図と航路を。
         </p>
+
+        {/* ボタン（変更なし） */}
         <div className="mt-8">
           <a
             href="/contact"

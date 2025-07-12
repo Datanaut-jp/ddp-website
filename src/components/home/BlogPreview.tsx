@@ -23,7 +23,7 @@ export const BlogPreview = ({ posts }: { posts: Post[] }) => {
             Mission Report
           </h2>
           <p className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            航海のヒントになる、最新の知見
+            NEWS
           </p>
         </div>
 

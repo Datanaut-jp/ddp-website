@@ -1,14 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image' // Imageコンポーネントをインポート
+import Image from 'next/image'
 import { useState } from 'react'
 
 const navItems = [
-  { href: '/vision', label: 'ビジョン' },
-  { href: '/service', label: '事業内容' },
-  { href: '/blog', label: 'ブログ' },
-  { href: '/company', label: '会社概要' },
+  { href: '/vision', label: 'Vision' },
+  { href: '/service', label: 'Service' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/company', label: 'Company' },
 ]
 
 export const Header = () => {
@@ -19,34 +19,32 @@ export const Header = () => {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* ロゴ */}
         <Link href="/" className="flex items-center">
-          {/* PC用ロゴ (フル) */}
           <Image
             src="/images/logo-full-color.svg"
             alt="Datanaut ロゴ"
-            width={140}
-            height={32}
+            width={180}
+            height={41}
             className="hidden md:block"
             priority
           />
-          {/* スマホ用ロゴ (アイコンのみ) */}
           <Image
-            src="/images/logo-full-color.svg"
+            src="/images/logo-icon-color.svg"
             alt="Datanaut ロゴ"
-            width={140}
-            height={32}
+            width={40}
+            height={40}
             className="block md:hidden"
             priority
           />
         </Link>
 
-        {/* ... (ナビゲーションメニュー部分は変更なし) ... */}
-        <div className="hidden items-center space-x-6 md:flex">
-          <nav className="flex items-center space-x-6">
+        {/* ナビゲーションメニュー */}
+        <div className="hidden items-center space-x-8 md:flex">
+          <nav className="flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className="text-sm font-medium text-gray-600 transition-colors hover:text-blue-600"
+                className="link-underline text-sm font-semibold text-gray-700"
               >
                 {item.label}
               </Link>
@@ -54,52 +52,30 @@ export const Header = () => {
           </nav>
           <Link
             href="/contact"
-            className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-blue-700"
+            className="rounded-md bg-[#305A9C] px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[#284B82]"
           >
             相談窓口
           </Link>
         </div>
+
+        {/* ハンバーガーメニュー */}
         <div className="md:hidden">
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="rounded-md p-2 text-gray-700 transition hover:bg-gray-100"
-            aria-label="メニューを開く"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            </svg>
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="rounded-md p-2 text-gray-700 transition hover:bg-gray-100" aria-label="メニューを開く">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" /></svg>
           </button>
         </div>
       </div>
+
+      {/* モバイル用メニュー */}
       {isMenuOpen && (
         <div className="absolute w-full bg-white shadow-md md:hidden">
           <nav className="flex flex-col space-y-2 p-4">
             {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={() => setIsMenuOpen(false)}
-                className="rounded-md p-2 text-gray-700 hover:bg-gray-50"
-              >
+              <Link key={item.label} href={item.href} onClick={() => setIsMenuOpen(false)} className="rounded-md p-3 text-base font-medium text-gray-700 hover:bg-gray-50">
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="/contact"
-              onClick={() => setIsMenuOpen(false)}
-              className="mt-2 rounded-md bg-blue-600 p-2 text-center text-white"
-            >
+            <Link href="/contact" onClick={() => setIsMenuOpen(false)} className="mt-2 rounded-md bg-[#305A9C] p-3 text-center font-medium text-white">
               相談窓口
             </Link>
           </nav>

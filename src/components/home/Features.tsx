@@ -1,17 +1,20 @@
-// アイコンを仮置きするためのコンポーネント
-const FeatureIcon = ({ children }: { children: React.ReactNode }) => {
-  return <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600">{children}</div>
-}
+import Image from 'next/image'; // Imageコンポーネントをインポート
 
 // FeatureCardという、一つの強みを表す部品
-const FeatureCard = ({ title, children }: { title: string, children: React.ReactNode }) => {
+// ↓↓↓ propsとして、画像のパス(iconSrc)を受け取るように変更しました ↓↓↓
+const FeatureCard = ({ iconSrc, title, children }: { iconSrc: string, title: string, children: React.ReactNode }) => {
   return (
     <div className="text-center">
       <div className="flex justify-center">
-        {/* 将来的にここにSVGアイコンなどを入れます */}
-        <FeatureIcon>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V3m0 18v-3" /></svg>
-        </FeatureIcon>
+        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+          {/* ↓↓↓ Next.jsのImageコンポーネントでSVGを表示します ↓↓↓ */}
+          <Image
+            src={iconSrc}
+            alt={`${title}のアイコン`}
+            width={28}
+            height={28}
+          />
+        </div>
       </div>
       <h3 className="text-xl font-bold text-gray-900">{title}</h3>
       <p className="mt-2 text-base text-gray-600">
@@ -36,13 +39,14 @@ export const Features = () => {
         </div>
 
         <div className="mt-16 grid grid-cols-1 gap-y-12 md:grid-cols-3 md:gap-x-8">
-          <FeatureCard title="伴走する航海士">
+          {/* ↓↓↓ それぞれのFeatureCardに、アイコンのパスを指定しています ↓↓↓ */}
+          <FeatureCard title="伴走する航海士" iconSrc="/images/icon-navigator.svg">
             お客様を孤独な航海にはさせません。中小企業診断士の資格を持つ専門家が良きパートナーとして、経営のゴールまで一緒に伴走します。
           </FeatureCard>
-          <FeatureCard title="最適な航路を提示">
+          <FeatureCard title="最適な航路を提示" iconSrc="/images/icon-map.svg">
             勘や経験だけに頼る航海は終わりです。ITツールとデータを活用し、業務の地図を描き、ビジネスの成長に向けた最適な航路を提示します。
           </FeatureCard>
-          <FeatureCard title="航海の資源を確保">
+          <FeatureCard title="航海の資源を確保" iconSrc="/images/icon-fuel.svg">
             挑戦には燃料が必要です。お客様が活用できる最適な補助金・助成金を「燃料補給」と捉え、専門家としてリソース確保を強力に支援します。
           </FeatureCard>
         </div>
