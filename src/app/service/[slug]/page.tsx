@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { ScrollAnimation } from '@/components/common/ScrollAnimation';
 
@@ -6,9 +7,17 @@ import { ScrollAnimation } from '@/components/common/ScrollAnimation';
 const CheckIcon = () => <svg className="h-6 w-6 flex-none text-blue-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>;
 const FeatureIcon = () => <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>;
 
+// サービスデータの型を定義
+type Service = {
+  title: string;
+  titleImage?: string;
+  description: string;
+  challenges: string[];
+  features: { name: string; description: string }[];
+};
 
 // 各サービスの詳細データ
-const servicesData = {
+const servicesData: { [key: string]: Service } = {
   'dx-support': {
     title: '業務効率化とDX推進支援',
     description: '貴社の業務プロセスを深く理解し、最適なITツール導入から定着までをワンストップで伴走支援。単なるツール導入ではない、抜本的な業務改革を実現します。',
@@ -21,6 +30,7 @@ const servicesData = {
   },
   'sme-consultant': {
     title: '中小企業診断士事務所',
+    titleImage: '/images/fujimoto-office-logo.svg', // ← ファイル名を.svgに修正しました
     description: '国や自治体が提供する、返済不要の補助金・助成金を活用しませんか？情報収集から複雑な申請手続き、採択後の報告まで、専門家がフルサポートします。',
     challenges: ['使える補助金があるのか、調べる時間がない', '申請書の書き方が難しくて、途中で諦めてしまった', '自社の取り組みがどの補助金に該当するかわからない'],
     features: [
@@ -32,7 +42,7 @@ const servicesData = {
 };
 
 export default function ServiceDetailPage({ params }: { params: { slug: string } }) {
-  const service = servicesData[params.slug as keyof typeof servicesData];
+  const service = servicesData[params.slug];
 
   if (!service) {
     notFound();
@@ -46,7 +56,18 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
       <div className="bg-gray-50">
         <div className="container mx-auto max-w-5xl px-4 py-16 text-center sm:py-24">
           <ScrollAnimation>
-            <h1 className="text-3xl font-bold tracking-tight text-blue-600 sm:text-5xl">{service.title}</h1>
+            {service.titleImage ? (
+              <Image
+                src={service.titleImage}
+                alt={service.title}
+                width={500}
+                height={150}
+                className="mx-auto"
+                priority
+              />
+            ) : (
+              <h1 className="text-3xl font-bold tracking-tight text-blue-600 sm:text-5xl">{service.title}</h1>
+            )}
             <p className="mt-6 text-lg leading-8 text-gray-700">{service.description}</p>
           </ScrollAnimation>
         </div>
