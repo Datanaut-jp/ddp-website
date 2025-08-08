@@ -1,18 +1,18 @@
 import Image from 'next/image'; // Imageコンポーネントをインポート
 
 // FeatureCardという、一つの強みを表す部品
-// ↓↓↓ propsとして、画像のパス(iconSrc)を受け取るように変更しました ↓↓↓
 const FeatureCard = ({ iconSrc, title, children }: { iconSrc: string, title: string, children: React.ReactNode }) => {
   return (
     <div className="text-center">
       <div className="flex justify-center">
-        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600">
-          {/* ↓↓↓ Next.jsのImageコンポーネントでSVGを表示します ↓↓↓ */}
+        {/* ↓↓↓ アイコンを囲む円のサイズを h-16 w-16 に拡大しました ↓↓↓ */}
+        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+          {/* ↓↓↓ アイコンの表示サイズを 40x40 に拡大しました ↓↓↓ */}
           <Image
             src={iconSrc}
             alt={`${title}のアイコン`}
-            width={28}
-            height={28}
+            width={40}
+            height={40}
           />
         </div>
       </div>
@@ -39,7 +39,6 @@ export const Features = () => {
         </div>
 
         <div className="mt-16 grid grid-cols-1 gap-y-12 md:grid-cols-3 md:gap-x-8">
-          {/* ↓↓↓ それぞれのFeatureCardに、アイコンのパスを指定しています ↓↓↓ */}
           <FeatureCard title="伴走する航海士" iconSrc="/images/icon-navigator.svg">
             お客様を孤独な航海にはさせません。中小企業診断士の資格を持つ専門家が良きパートナーとして、経営のゴールまで一緒に伴走します。
           </FeatureCard>
