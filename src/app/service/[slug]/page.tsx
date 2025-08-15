@@ -2,11 +2,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { ScrollAnimation } from '@/components/common/ScrollAnimation';
+import React from 'react';
 
 // このページで使うアイコンコンポーネント
 const CheckIcon = () => <svg className="h-6 w-6 flex-none text-blue-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>;
-
-// ↓↓↓ 新しいFeatureIconコンポーネントを定義しました ↓↓↓
 const FeatureIcon = ({ number }: { number: number }) => {
   return (
     <div className="relative h-12 w-12">
@@ -19,7 +18,6 @@ const FeatureIcon = ({ number }: { number: number }) => {
     </div>
   );
 };
-
 
 // サービスデータの型を定義
 type Service = {
@@ -115,7 +113,6 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
               <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Datanautが提供する価値</p>
             </div>
             <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
-              {/* ↓↓↓ ここのmap関数の中身を、新しいアイコンを使うように修正しました ↓↓↓ */}
               {service.features.map((feature, index) => (
                 <div key={feature.name} className="flex flex-col items-center text-center">
                   <FeatureIcon number={index + 1} />
@@ -130,17 +127,28 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
 
       {/* 4. ご支援の流れ */}
       <div className="py-16 sm:py-24">
-        <div className="container mx-auto max-w-3xl px-4 text-center">
+        <div className="container mx-auto max-w-5xl px-4 text-center">
           <ScrollAnimation>
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">ご支援の流れ</h2>
-            <ol className="mt-12 grid grid-cols-1 gap-8 text-left sm:grid-cols-2 md:grid-cols-4">
+            <ol className="mt-16 flex flex-col items-center justify-between gap-y-8 sm:flex-row sm:gap-x-4">
               {steps.map((step, index) => (
-                <li key={step} className="relative flex items-start">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 font-bold text-white">
-                    {index + 1}
-                  </div>
-                  <p className="ml-4 text-lg font-medium text-gray-800">{step}</p>
-                </li>
+                <React.Fragment key={step}>
+                  <li className="flex w-full flex-col items-center text-center sm:w-auto">
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 font-bold text-white">
+                      {index + 1}
+                    </div>
+                    <p className="mt-2 text-lg font-medium text-gray-800">{step}</p>
+                  </li>
+                  {/* ↓↓↓ このliタグのクラス名を修正しました ↓↓↓ */}
+                  {index < steps.length - 1 && (
+                    <li className="hidden flex-1 items-center sm:flex">
+                      <div className="relative w-full">
+                        <div className="w-full border-b-2 border-gray-300"></div>
+                        <div className="absolute -right-2 top-1/2 -translate-y-1/2 text-gray-300">▶</div>
+                      </div>
+                    </li>
+                  )}
+                </React.Fragment>
               ))}
             </ol>
           </ScrollAnimation>
