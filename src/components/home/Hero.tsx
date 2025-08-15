@@ -5,28 +5,29 @@ export const Hero = () => {
     <section className="relative h-[80vh] min-h-[500px] text-white">
       {/* 背景画像 */}
       <div className="absolute inset-0">
-        {/* モバイル用背景画像 (画面幅が768px未満で表示) */}
+        {/* モバイル用背景画像 */}
         <Image
           src="/images/top-S.jpg"
           alt="Datanaut hero background for mobile"
           fill
-          className="object-cover md:hidden" // md以上で非表示
+          className="object-cover md:hidden"
           priority
           quality={90}
         />
-        {/* PC用背景画像 (画面幅が768px以上で表示) */}
+        {/* PC用背景画像 */}
         <Image
           src="/images/top-L.jpg"
           alt="Datanaut hero background for desktop"
           fill
-          className="object-cover hidden md:block" // md未満で非表示
+          // ↓↓↓ この行に object-bottom を追加しました ↓↓↓
+          className="object-cover hidden md:block object-bottom"
           priority
           quality={90}
         />
         <div className="absolute inset-0 bg-black opacity-50"></div>
       </div>
 
-      {/* テキストとボタンのコンテンツ（お客様の既存のスタイルを維持） */}
+      {/* テキストとボタンのコンテンツ */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center text-center">
         <h1 
           className="text-4xl font-semibold tracking-widest md:text-5xl"
