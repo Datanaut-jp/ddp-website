@@ -5,7 +5,21 @@ import { ScrollAnimation } from '@/components/common/ScrollAnimation';
 
 // このページで使うアイコンコンポーネント
 const CheckIcon = () => <svg className="h-6 w-6 flex-none text-blue-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>;
-const FeatureIcon = () => <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>;
+
+// ↓↓↓ 新しいFeatureIconコンポーネントを定義しました ↓↓↓
+const FeatureIcon = ({ number }: { number: number }) => {
+  return (
+    <div className="relative h-12 w-12">
+      <svg className="h-full w-full text-blue-600" fill="none" viewBox="0 0 64 64">
+        <path stroke="currentColor" strokeWidth="2" d="M14 1H50C57.1797 1 63 6.8203 63 14V50C63 57.1797 57.1797 63 50 63H14C6.8203 63 1 57.1797 1 50V14C1 6.8203 6.8203 1 14 1Z" />
+      </svg>
+      <span className="absolute inset-0 flex items-center justify-center text-xl font-bold text-blue-600">
+        {number}
+      </span>
+    </div>
+  );
+};
+
 
 // サービスデータの型を定義
 type Service = {
@@ -78,7 +92,6 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
         <div className="container mx-auto max-w-3xl px-4">
           <ScrollAnimation>
             <h2 className="text-2xl font-bold tracking-tight text-center text-gray-900 sm:text-3xl">こんな課題はありませんか？</h2>
-            {/* ↓↓↓ このulタグとliタグのクラス名を修正しました ↓↓↓ */}
             <div className="flex justify-center">
               <ul className="mt-8 space-y-4 text-lg text-gray-600">
                 {service.challenges.map((challenge, index) => (
@@ -102,11 +115,10 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
               <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Datanautが提供する価値</p>
             </div>
             <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
-              {service.features.map((feature) => (
+              {/* ↓↓↓ ここのmap関数の中身を、新しいアイコンを使うように修正しました ↓↓↓ */}
+              {service.features.map((feature, index) => (
                 <div key={feature.name} className="flex flex-col items-center text-center">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600">
-                    <FeatureIcon />
-                  </div>
+                  <FeatureIcon number={index + 1} />
                   <h3 className="mt-5 text-xl font-semibold text-gray-900">{feature.name}</h3>
                   <p className="mt-2 text-base text-gray-600">{feature.description}</p>
                 </div>
