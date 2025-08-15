@@ -1,5 +1,5 @@
 import { Roles } from '@/components/vision/Roles'
-import { ScrollAnimation } from '@/components/common/ScrollAnimation' // 作成したコンポーネントをインポート
+import { ScrollAnimation } from '@/components/common/ScrollAnimation'
 
 export default function VisionPage() {
   return (
@@ -19,8 +19,9 @@ export default function VisionPage() {
       {/* 2. 私たちのビジョン */}
       <ScrollAnimation>
         <section className="bg-blue-50 py-16 sm:py-24">
-          <div className="container mx-auto max-w-3xl px-4 text-center">
-            <p className="text-xl leading-9 text-gray-800 md:text-2xl md:leading-10">
+          {/* ↓↓↓ このdivとpタグのクラス名を修正しました ↓↓↓ */}
+          <div className="container mx-auto max-w-3xl px-4 flex justify-center">
+            <p className="text-lg leading-8 text-gray-800 md:text-xl md:leading-9 text-left">
               私たちの重要なビジョンは、専門知識やリソース不足に起因する、大企業との間に存在する「情報の非対称性」を解消することです。
               <br className="my-2" />
               勘や経験だけに頼る経営から脱却し、すべての中小企業が公平な情報のもとで成長機会を掴める社会の実現を目指します。
@@ -34,7 +35,7 @@ export default function VisionPage() {
         <div className="py-16 sm:py-24">
           <div className="container mx-auto max-w-3xl px-4 space-y-6 text-lg leading-8 text-gray-700">
             <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
-              🌌 ブランドストーリー
+              ＢＲＡＮＤ　ＳＴＯＲＹ
             </h2>
             <p>
               かつて、情報とは「資産」ではなく「混乱」だった。
