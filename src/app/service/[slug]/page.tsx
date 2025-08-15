@@ -30,7 +30,7 @@ const servicesData: { [key: string]: Service } = {
   },
   'sme-consultant': {
     title: '中小企業診断士事務所',
-    titleImage: '/images/fujimoto-office-logo.svg', // ← ファイル名を.svgに修正しました
+    titleImage: '/images/fujimoto-office-logo.svg',
     description: '国や自治体が提供する、返済不要の補助金・助成金を活用しませんか？情報収集から複雑な申請手続き、採択後の報告まで、専門家がフルサポートします。',
     challenges: ['使える補助金があるのか、調べる時間がない', '申請書の書き方が難しくて、途中で諦めてしまった', '自社の取り組みがどの補助金に該当するかわからない'],
     features: [
@@ -73,19 +73,22 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
         </div>
       </div>
 
-      {/* 2. 「こんな課題ありませんか？」セクション */}
+      {/* 2. 「こんな課題はありませんか？」セクション */}
       <div className="py-16 sm:py-24">
         <div className="container mx-auto max-w-3xl px-4">
           <ScrollAnimation>
             <h2 className="text-2xl font-bold tracking-tight text-center text-gray-900 sm:text-3xl">こんな課題はありませんか？</h2>
-            <ul className="mt-8 space-y-4 text-lg text-gray-600">
-              {service.challenges.map((challenge, index) => (
-                <li key={index} className="flex items-start">
-                  <CheckIcon />
-                  <span className="ml-3">{challenge}</span>
-                </li>
-              ))}
-            </ul>
+            {/* ↓↓↓ このulタグとliタグのクラス名を修正しました ↓↓↓ */}
+            <div className="flex justify-center">
+              <ul className="mt-8 space-y-4 text-lg text-gray-600">
+                {service.challenges.map((challenge, index) => (
+                  <li key={index} className="flex items-start whitespace-nowrap">
+                    <CheckIcon />
+                    <span className="ml-3">{challenge}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </ScrollAnimation>
         </div>
       </div>
