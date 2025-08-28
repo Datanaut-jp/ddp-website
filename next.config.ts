@@ -1,22 +1,28 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // ↓↓↓ ビルドエラーを無視するための設定を追加しました ↓↓↓
   typescript: {
-    // Vercelでのビルド時に、TypeScriptのエラーを無視する設定
     ignoreBuildErrors: true,
   },
 
-  // お客様の現在の画像設定はそのままです
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
+        protocol: 'https', // ← ここにカンマを追加しました
         hostname: 'images.microcms-assets.io',
         port: '',
         pathname: '/assets/**',
       },
     ],
   },
+
+  // @ts-ignore
+  webpack(config, options) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"]
+    });
+    return config;
+  },
 }
 
-export default nextConfig
+export default nextConfig;

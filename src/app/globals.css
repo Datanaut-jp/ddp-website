@@ -138,3 +138,6 @@ body {
 .link-underline:hover::after {
   width: 100%; /* ホバー時に幅100%（線が表示される） */
 }
+
+@import 'swiper/css';
+@import 'swiper/css/effect-fade';
