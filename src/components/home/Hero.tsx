@@ -7,10 +7,9 @@ import { useEffect, useState } from 'react'
 
 // スライドショーに使う画像のリスト
 const desktopImages = [
-  { src: '/images/top-L.jpg', alt: 'Hero image 1' },
-];
-const mobileImages = [
-  { src: '/images/top-S.jpg', alt: 'Hero image 1 for mobile' },
+  { src: '/images/top-L-1.jpeg', alt: 'Hero image 1' },
+  { src: '/images/top-L-2.jpeg', alt: 'Hero image 2' },
+  { src: '/images/top-L-3.jpeg', alt: 'Hero image 3' },
 ];
 
 export const Hero = () => {
@@ -27,91 +26,70 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="relative h-screen text-white">
-      {/* 背景画像スライドショー */}
-      <Swiper
-        modules={[Autoplay, EffectFade]}
-        effect="fade"
-        loop={true}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
-        className="absolute inset-0 hidden md:block"
-      >
-        {desktopImages.map((image, index) => (
-          <SwiperSlide key={index}>
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              className="object-cover"
-              priority={index === 0}
-              quality={100}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <Swiper
-        modules={[Autoplay, EffectFade]}
-        effect="fade"
-        loop={true}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
-        className="absolute inset-0 md:hidden"
-      >
-        {mobileImages.map((image, index) => (
-          <SwiperSlide key={index}>
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              className="object-cover"
-              priority={index === 0}
-              quality={100}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      
-      <div className="absolute inset-0 bg-black/60"></div>
+    <section className="relative h-screen text-white overflow-hidden">
+      {/* 背景画像スライドショー（いちばん後ろ） */}
+      <div className="absolute inset-0 -z-10">
+        <Swiper
+          modules={[Autoplay, EffectFade]}
+          effect="fade"
+          loop
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          className="h-full w-full"
+        >
+          {desktopImages.map((image, index) => (
+            <SwiperSlide key={index}>
+              {/* fill を使うために relative でラップ */}
+              <div className="relative h-full w-full">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="object-cover"
+                  priority={index === 0}
+                  quality={100}
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
 
-      {/* テキストとロゴのコンテンツ */}
-      {/* ▼▼▼ このdivのクラス名を修正しました ▼▼▼ */}
-      <div 
-        className={`absolute top-[30%] left-1/2 -translate-x-1/2 md:top-1/2 md:-translate-y-1/2 w-full text-center transition-opacity duration-1000 ${showText ? 'opacity-100' : 'opacity-0'}`}
+      {/* オーバーレイ（背景の上・テキストの下） */}
+      <div className="absolute inset-0 bg-black/60 z-0 pointer-events-none"></div>
+
+      {/* テキストとロゴのコンテンツ（前面） */}
+      <div
+        className={`absolute z-10 top-[30%] left-1/2 -translate-x-1/2 md:top-1/2 md:-translate-y-1/2 w-full text-center transition-opacity duration-1000 ${showText ? 'opacity-100' : 'opacity-0'}`}
       >
-        <div>
-          <h1 className="text-4xl font-bold tracking-wider sm:text-5xl md:text-6xl">
-            CHARTING
-            <br />
-            YOUR DATA UNIVERSE.
-          </h1>
-          <div className="mt-8 flex justify-center">
-            <Image
-              src="/images/logo-full-white.svg"
-              alt="Datanaut Logo"
-              width={200}
-              height={45}
-            />
-          </div>
+        <h1 className="text-4xl font-bold tracking-wider sm:text-5xl md:text-6xl">
+          CHARTING
+          <br />
+          YOUR DATA UNIVERSE.
+        </h1>
+        <div className="mt-8 flex justify-center">
+          <Image
+            src="/images/logo-full-white.svg"
+            alt="Datanaut Logo"
+            width={200}
+            height={45}
+          />
         </div>
       </div>
-      
-      {/* スクロール矢印 */}
-      <div 
-        className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-1000 ${showScroll ? 'opacity-100' : 'opacity-0'}`}
+
+      {/* スクロール矢印（前面） */}
+      <div
+        className={`absolute z-10 bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-1000 ${showScroll ? 'opacity-100' : 'opacity-0'}`}
       >
         <div className="flex items-center space-x-2 text-sm font-light">
           <span style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>scroll.</span>
-          <ArrowIcon
-            width={24}
-            height={64}
-            className="animate-bounce"
-          />
+          <ArrowIcon width={24} height={64} className="animate-bounce" />
         </div>
       </div>
     </section>
   )
 }
 
-// 矢印SVGをコード内に直接定義
+// 矢印SVG
 const ArrowIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
