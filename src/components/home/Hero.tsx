@@ -27,7 +27,7 @@ export const Hero = () => {
 
   return (
     <section className="relative h-screen text-white overflow-hidden">
-      {/* 背景画像スライドショー（いちばん後ろ） */}
+      {/* 背景画像スライドショー */}
       <div className="absolute inset-0 -z-10">
         <Swiper
           modules={[Autoplay, EffectFade]}
@@ -38,7 +38,6 @@ export const Hero = () => {
         >
           {desktopImages.map((image, index) => (
             <SwiperSlide key={index}>
-              {/* fill を使うために relative でラップ */}
               <div className="relative h-full w-full">
                 <Image
                   src={image.src}
@@ -54,29 +53,29 @@ export const Hero = () => {
         </Swiper>
       </div>
 
-      {/* オーバーレイ（背景の上・テキストの下） */}
       <div className="absolute inset-0 bg-black/60 z-0 pointer-events-none"></div>
 
-      {/* テキストとロゴのコンテンツ（前面） */}
+      {/* テキストとロゴのコンテンツ */}
       <div
-        className={`absolute z-10 top-[30%] left-1/2 -translate-x-1/2 md:top-1/2 md:-translate-y-1/2 w-full text-center transition-opacity duration-1000 ${showText ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute z-10 top-[30%] left-1/2 -translate-x-1/2 md:top-1/2 md:-translate-y-1/2 w-full px-4 text-center transition-opacity duration-1000 ${showText ? 'opacity-100' : 'opacity-0'}`}
       >
-        <h1 className="text-4xl font-bold tracking-wider sm:text-5xl md:text-6xl">
+        {/* ↓↓↓ このh1タグのクラス名を修正しました ↓↓↓ */}
+        <h1 className="text-3xl font-light tracking-wider sm:text-5xl md:text-6xl">
           CHARTING
           <br />
-          YOUR DATA UNIVERSE.
+          <span className="whitespace-nowrap">YOUR DATA UNIVERSE.</span>
         </h1>
         <div className="mt-8 flex justify-center">
           <Image
             src="/images/logo-full-white.svg"
             alt="Datanaut Logo"
-            width={200}
-            height={45}
+            width={180}
+            height={40.5}
           />
         </div>
       </div>
 
-      {/* スクロール矢印（前面） */}
+      {/* スクロール矢印 */}
       <div
         className={`absolute z-10 bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-1000 ${showScroll ? 'opacity-100' : 'opacity-0'}`}
       >
