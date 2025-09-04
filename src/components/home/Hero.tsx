@@ -59,7 +59,6 @@ export const Hero = () => {
       <div
         className={`absolute z-10 top-[30%] left-1/2 -translate-x-1/2 md:top-1/2 md:-translate-y-1/2 w-full px-4 text-center transition-opacity duration-1000 ${showText ? 'opacity-100' : 'opacity-0'}`}
       >
-        {/* ↓↓↓ このh1タグのクラス名を修正しました ↓↓↓ */}
         <h1 className="text-3xl font-light tracking-wider sm:text-5xl md:text-6xl">
           CHARTING
           <br />
@@ -69,15 +68,15 @@ export const Hero = () => {
           <Image
             src="/images/logo-full-white.svg"
             alt="Datanaut Logo"
-            width={180}
-            height={40.5}
+            width={216}
+            height={48.6}
           />
         </div>
       </div>
 
       {/* スクロール矢印 */}
       <div
-        className={`absolute z-10 bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-1000 ${showScroll ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute z-10 bottom-24 left-1/2 -translate-x-1/2 transition-opacity duration-1000 ${showScroll ? 'opacity-100' : 'opacity-0'}`}
       >
         <div className="flex items-center space-x-2 text-sm font-light">
           <span style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>scroll.</span>
