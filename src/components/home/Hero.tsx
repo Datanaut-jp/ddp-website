@@ -59,7 +59,8 @@ export const Hero = () => {
       <div
         className={`absolute z-10 top-[30%] left-1/2 -translate-x-1/2 md:top-1/2 md:-translate-y-1/2 w-full px-4 text-center transition-opacity duration-1000 ${showText ? 'opacity-100' : 'opacity-0'}`}
       >
-        <h1 className="text-3xl font-light tracking-wider sm:text-5xl md:text-6xl">
+        {/* ↓↓↓ このh1タグのクラス名を修正しました ↓↓↓ */}
+        <h1 className="text-3xl font-bold tracking-wider sm:text-5xl md:text-6xl md:font-light">
           CHARTING
           <br />
           <span className="whitespace-nowrap">YOUR DATA UNIVERSE.</span>
