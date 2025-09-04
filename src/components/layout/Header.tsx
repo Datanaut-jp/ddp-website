@@ -15,7 +15,8 @@ export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
+    // ↓↓↓ この行のクラス名を修正しました ↓↓↓
+    <header className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* ロゴ */}
         <Link href="/" className="flex items-center">
