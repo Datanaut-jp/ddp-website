@@ -18,12 +18,16 @@ export const Hero = () => {
 
   useEffect(() => {
     const textTimer = setTimeout(() => setShowText(true), 1000);
-    const scrollTimer = setTimeout(() => setShowScroll(true), 2000);
+    const scrollTimer = setTimeout(() => setShowScroll(true), 3000);
     return () => {
       clearTimeout(textTimer);
       clearTimeout(scrollTimer);
     };
   }, []);
+
+  // アニメーションさせるテキストを定義
+  const line1 = "CHARTING";
+  const line2 = "YOUR DATA UNIVERSE.";
 
   return (
     <section className="relative h-screen text-white overflow-hidden">
@@ -57,15 +61,38 @@ export const Hero = () => {
 
       {/* テキストとロゴのコンテンツ */}
       <div
-        className={`absolute z-10 top-[30%] left-1/2 -translate-x-1/2 md:top-1/2 md:-translate-y-1/2 w-full px-4 text-center transition-opacity duration-1000 ${showText ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute z-10 top-[30%] left-1/2 -translate-x-1/2 md:top-1/2 md:-translate-y-1/2 w-full px-4 text-center`}
       >
-        {/* ↓↓↓ このh1タグのクラス名を修正しました ↓↓↓ */}
-        <h1 className="text-3xl font-bold tracking-wider sm:text-5xl md:text-6xl md:font-light">
-          CHARTING
-          <br />
-          <span className="whitespace-nowrap">YOUR DATA UNIVERSE.</span>
+        {/* ↓↓↓ ここのクラス名を修正しました ↓↓↓ */}
+        <h1 className="text-3xl font-bold tracking-wider sm:text-5xl sm:font-light md:text-7xl text-white">
+          {/* 1行目 */}
+          <div className="whitespace-nowrap">
+            {line1.split('').map((char, index) => (
+              <span
+                key={index}
+                className={`inline-block transition-all duration-500 ${showText ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                style={{ transitionDelay: `${index * 50}ms` }}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </span>
+            ))}
+          </div>
+          {/* 2行目 */}
+          <div className="whitespace-nowrap">
+            {line2.split('').map((char, index) => (
+              <span
+                key={index}
+                className={`inline-block transition-all duration-500 ${showText ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                style={{ transitionDelay: `${(line1.length + index) * 50}ms` }}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </span>
+            ))}
+          </div>
         </h1>
-        <div className="mt-8 flex justify-center">
+
+        {/* ロゴはテキストアニメーション後に表示 */}
+        <div className={`mt-10 flex justify-center transition-opacity duration-1000 delay-1000 ${showText ? 'opacity-100' : 'opacity-0'}`}>
           <Image
             src="/images/logo-full-white.svg"
             alt="Datanaut Logo"
@@ -81,7 +108,7 @@ export const Hero = () => {
       >
         <div className="flex items-center space-x-2 text-sm font-light">
           <span style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>scroll.</span>
-          <ArrowIcon width={24} height={64} className="animate-bounce" />
+          <ArrowIcon width={24} height={64} className="animate-bounce translate-y-6" />
         </div>
       </div>
     </section>
@@ -93,7 +120,7 @@ const ArrowIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
-    viewBox="0 0 24 24"
+    viewBox="0 0 24"
     strokeWidth={1.5}
     stroke="currentColor"
     {...props}
