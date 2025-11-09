@@ -36,5 +36,12 @@
   },
   "lint-staged": {
     "*": "prettier --write --ignore-unknown"
+  },
+  "pnpm": {
+    "allowed-scripts": {
+      "@tailwindcss/oxide": true,
+      "sharp": true,
+      "unrs-resolver": true
+    }
   }
 }
