@@ -38,7 +38,7 @@
     "*": "prettier --write --ignore-unknown"
   },
   "pnpm": {
-    "allowed-scripts": {
+    "allowedScripts": {
       "@tailwindcss/oxide": true,
       "sharp": true,
       "unrs-resolver": true
