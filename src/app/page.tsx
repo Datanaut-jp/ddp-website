@@ -8,23 +8,20 @@ import { BlogPreview } from '@/components/home/BlogPreview';
 import { client } from '@/libs/microcms';
 import { ScrollAnimation } from '@/components/common/ScrollAnimation';
 import { getNoteFeed } from '@/libs/noteFeed';
-
-// --- ▼ 修正 ▼ ---
-// 'NoteArticle' を削除（このファイルでは使われていないため）
-import { MicroCMSPost, MergedArticle } from '@/types';
-// --- ▲ 修正 ▲ ---
+import { MicroCMSPost, MergedArticle } from '@/types'; // NoteArticleは使わないので削除
 
 export default async function Home() {
-  // --- ▼ 1. MicroCMSの記事を取得 ▼ ---
+  // --- 1. MicroCMSの記事を取得 ---
   const blogData = await client.get<{ contents: MicroCMSPost[] }>({
     endpoint: 'blog',
-    queries: { limit: 3, orders: '-publishedAt' },
+    // (depth: 1 は参照フィールドがないため不要ですが、残しても害はありません)
+    queries: { limit: 3, orders: '-publishedAt', depth: 1 },
   });
 
-  // --- ▼ 2. noteの記事を取得 ▼ ---
+  // --- 2. noteの記事を取得 ---
   const allNoteArticles = await getNoteFeed();
 
-  // --- ▼ 3. データを「共通の型 (MergedArticle)」に変換 ▼ ---
+  // --- 3. データを「共通の型 (MergedArticle)」に変換 ---
 
   // 3a. MicroCMSの記事を変換
   const internalArticles: MergedArticle[] = blogData.contents.map((post) => ({
@@ -34,27 +31,30 @@ export default async function Home() {
     publishedAt: post.publishedAt || new Date().toISOString(),
     url: `/blog/${post.id}`, // 内部リンク
     sourceType: 'internal',
-    category: post.category?.name || '未分類',
+    // --- ▼ 修正箇所 ▼ ---
+    // .name を削除し、文字列そのものを参照
+    category: post.category || '未分類', 
+    // --- ▲ 修正箇所 ▲ ---
   }));
 
   // 3b. noteの記事を変換
   const noteArticles: MergedArticle[] = allNoteArticles.map((article) => ({
-    id: article.link, // リンクをIDとして使用
+    id: article.link,
     title: article.title,
     thumbnail: article.thumbnail,
-    publishedAt: new Date(article.pubDate).toISOString(), // Dateオブジェクトに変換
-    url: article.link, // 外部リンク
+    publishedAt: new Date(article.pubDate).toISOString(),
+    url: article.link,
     sourceType: 'note',
     category: '外部記事 (note)',
   }));
 
-  // --- ▼ 4. 2つのリストを合体させ、日付（新着順）で並び替え ▼ ---
+  // --- 4. 2つのリストを合体させ、日付（新着順）で並び替え ---
   const allMergedArticles = [...internalArticles, ...noteArticles].sort(
     (a, b) =>
       new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   );
 
-  // --- ▼ 5. ご要望通り、最新3件だけを取得 ▼ ---
+  // --- 5. 最新3件だけを取得 ---
   const latestThreeMergedArticles = allMergedArticles.slice(0, 3);
 
   return (

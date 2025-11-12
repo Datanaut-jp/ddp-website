@@ -5,18 +5,14 @@ import Image from 'next/image';
 import { client } from '@/libs/microcms';
 import { format } from 'date-fns';
 import { getNoteFeed } from '@/libs/noteFeed';
-
-// --- ▼ 修正 ▼ ---
-// 'NoteArticle' を削除（このファイルでは使われていないため）
 import { MicroCMSPost, MergedArticle } from '@/types';
-// --- ▲ 修正 ▲ ---
 
 // ブログ一覧ページ
 export default async function BlogPage() {
-  // 3a. MicroCMSから全記事のデータを取得 (最大100件)
+  // 3a. MicroCMSから全記事のデータを取得
   const blogData = await client.get<{ contents: MicroCMSPost[] }>({
     endpoint: 'blog',
-    queries: { orders: '-publishedAt', limit: 100 },
+    queries: { orders: '-publishedAt', limit: 100, depth: 1 },
   });
 
   // 3b. noteから全記事のデータを取得
@@ -26,20 +22,20 @@ export default async function BlogPage() {
   const internalArticles: MergedArticle[] = blogData.contents.map((post) => ({
     id: post.id,
     title: post.title,
-    thumbnail: post.eyecatch?.url || '/images/apple-icon.png', // 代替画像
+    thumbnail: post.eyecatch?.url || '/images/apple-icon.png',
     publishedAt: post.publishedAt || new Date().toISOString(),
-    url: `/blog/${post.id}`, // 内部リンク
+    url: `/blog/${post.id}`,
     sourceType: 'internal',
-    category: post.category?.name || '未分類',
+    category: post.category || '未分類', 
   }));
 
   // 4b. noteの記事を変換
   const noteArticles: MergedArticle[] = allNoteArticles.map((article) => ({
-    id: article.link, // リンクをIDとして使用
+    id: article.link,
     title: article.title,
     thumbnail: article.thumbnail,
-    publishedAt: new Date(article.pubDate).toISOString(), // Dateオブジェクトに変換
-    url: article.link, // 外部リンク
+    publishedAt: new Date(article.pubDate).toISOString(),
+    url: article.link,
     sourceType: 'note',
     category: '外部記事 (note)',
   }));
@@ -99,9 +95,11 @@ export default async function BlogPage() {
                     )}
                   </div>
                   <div className="p-6">
+                    {/* --- ▼ 修正箇所 ▼ --- */}
                     <p className="text-sm text-blue-600">
                       {post.sourceType === 'note' ? '外部記事 (note)' : post.category}
                     </p>
+                    {/* --- ▲ 修正箇所 (</SSEC> から </p> に修正) ▲ --- */}
                     <h3 className="mt-2 text-lg font-bold text-gray-900 transition-colors group-hover:text-blue-600 line-clamp-3">
                       {post.title}
                     </h3>
