@@ -8,26 +8,60 @@ import { BlogPreview } from '@/components/home/BlogPreview';
 import { client } from '@/libs/microcms';
 import { ScrollAnimation } from '@/components/common/ScrollAnimation';
 
-// --- ▼ 3行追加 ▼ ---
-// ステップ4で作成したコンポーネント
-import { NoteFeed } from '@/components/home/NoteFeed';
-// ステップ3で作成したロジック
+// --- ▼ 2行追加 (型とnote取得ロジック) ▼ ---
 import { getNoteFeed } from '@/libs/noteFeed';
-// --- ▲ 3行追加 ▲ ---
+import { MicroCMSPost, NoteArticle, MergedArticle } from '@/types'; 
+// --- ▲ 2行追加 ▲ ---
+
+// --- ▼ 削除 ▼ ---
+// import { NoteFeed } from '@/components/home/NoteFeed'; // ◀ 削除 (BlogPreviewに統合するため)
+// --- ▲ 削除 ▲ ---
 
 
 export default async function Home() {
-  const blogData = await client.get({
+
+  // --- ▼ 1. MicroCMSの記事を取得 ▼ ---
+  const blogData = await client.get<{ contents: MicroCMSPost[] }>({
     endpoint: 'blog',
     queries: { limit: 3, orders: '-publishedAt' },
   });
 
-  // --- ▼ 2行追加 ▼ ---
-  // noteの記事を取得
+  // --- ▼ 2. noteの記事を取得 ▼ ---
   const allNoteArticles = await getNoteFeed();
-  // ご要望通り、最新3件だけ取得
-  const latestThreeArticles = allNoteArticles.slice(0, 3);
-  // --- ▲ 2行追加 ▲ ---
+
+  // --- ▼ 3. データを「共通の型 (MergedArticle)」に変換 ▼ ---
+
+  // 3a. MicroCMSの記事を変換
+  const internalArticles: MergedArticle[] = blogData.contents.map((post) => ({
+    id: post.id,
+    title: post.title,
+    thumbnail: post.eyecatch?.url || '/images/apple-icon.png', // 代替画像
+    publishedAt: post.publishedAt || new Date().toISOString(),
+    url: `/blog/${post.id}`, // 内部リンク
+    sourceType: 'internal',
+    category: post.category?.name || '未分類',
+  }));
+
+  // 3b. noteの記事を変換
+  const noteArticles: MergedArticle[] = allNoteArticles.map((article) => ({
+    id: article.link, // リンクをIDとして使用
+    title: article.title,
+    thumbnail: article.thumbnail,
+    publishedAt: new Date(article.pubDate).toISOString(), // Dateオブジェクトに変換
+    url: article.link, // 外部リンク
+    sourceType: 'note',
+    category: '外部記事 (note)',
+  }));
+
+  // --- ▼ 4. 2つのリストを合体させ、日付（新着順）で並び替え ▼ ---
+  const allMergedArticles = [...internalArticles, ...noteArticles].sort(
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+  );
+
+  // --- ▼ 5. ご要望通り、最新3件だけを取得 ▼ ---
+  const latestThreeMergedArticles = allMergedArticles.slice(0, 3);
+
 
   return (
     <>
@@ -43,16 +77,18 @@ export default async function Home() {
       <ScrollAnimation animation="slide-in-right">
         <Features />
       </ScrollAnimation>
+
+      {/* --- ▼ 修正 ▼ --- */}
+      {/* 2つあったセクションを1つに統合 */}
       <ScrollAnimation animation="slide-in-left">
-        <BlogPreview posts={blogData.contents} />
+        {/* 並び替えた最新3件のリストを BlogPreview に渡す */}
+        <BlogPreview posts={latestThreeMergedArticles} />
       </ScrollAnimation>
+      {/* --- ▲ 修正 ▲ --- */}
       
-      {/* --- ▼ 3行追加（ここが最下部） ▼ --- */}
-      {/* サイトの表示とアニメーションを統一するため、ScrollAnimationで囲います */}
-      <ScrollAnimation animation="slide-in-right">
-        <NoteFeed items={latestThreeArticles} />
-      </ScrollAnimation>
-      {/* --- ▲ 3行追加 ▲ --- */}
+      {/* --- ▼ 削除 ▼ --- */}
+      {/* NoteFeedコンポーネントは不要になったので削除 */}
+      {/* --- ▲ 削除 ▲ --- */}
     </>
   );
 }
