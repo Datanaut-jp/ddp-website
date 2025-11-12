@@ -37,7 +37,7 @@ async function getPost(postId: string) {
   }
 }
 
-// ページ本体（ここからasyncを外します）
+// ページ本体
 export default async function PostPage({ params }: Props) {
   const post = await getPost(params.id);
 
@@ -70,9 +70,12 @@ export default async function PostPage({ params }: Props) {
           )}
         </div>
 
-        <div className="prose prose-lg mt-12 max-w-none">
+        {/* --- ▼ 修正箇所：text-gray-900 を追加 ▼ --- */}
+        <div className="prose prose-lg mt-12 max-w-none text-gray-900">
           {parse(post.content)}
         </div>
+        {/* --- ▲ 修正箇所 ▲ --- */}
+
       </div>
     </div>
   );
