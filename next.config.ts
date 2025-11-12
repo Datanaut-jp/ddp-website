@@ -1,3 +1,5 @@
+// next.config.ts
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
@@ -7,11 +9,20 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https', // ← ここにカンマを追加しました
+        protocol: 'https',
         hostname: 'images.microcms-assets.io',
         port: '',
         pathname: '/assets/**',
       },
+      // --- ▼ 1ブロック（6行）追加 ▼ ---
+      // noteのサムネイル画像（assets.st-note.com）を許可
+      {
+        protocol: 'https',
+        hostname: 'assets.st-note.com',
+        port: '',
+        pathname: '/**', // noteの画像パスは様々なので/**で全て許可します
+      },
+      // --- ▲ 1ブロック追加 ▲ ---
     ],
   },
 
