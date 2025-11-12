@@ -4,21 +4,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { client } from '@/libs/microcms';
 import { format } from 'date-fns';
-
-// --- ▼ 1. 必要な型と関数をインポート ▼ ---
 import { getNoteFeed } from '@/libs/noteFeed';
-import { MicroCMSPost, NoteArticle, MergedArticle } from '@/types';
 
-// --- ▲ 1. 必要な型と関数をインポート ▲ ---
-
-// --- 2. 古いPost型定義は削除 (src/types/index.tsで管理するため) ---
-// type Post = { ... }; // ◀ 削除
+// --- ▼ 修正 ▼ ---
+// 'NoteArticle' を削除（このファイルでは使われていないため）
+import { MicroCMSPost, MergedArticle } from '@/types';
+// --- ▲ 修正 ▲ ---
 
 // ブログ一覧ページ
 export default async function BlogPage() {
-  
-  // --- ▼ 3. MicroCMSとnoteの両方から全データを取得 ▼ ---
-
   // 3a. MicroCMSから全記事のデータを取得 (最大100件)
   const blogData = await client.get<{ contents: MicroCMSPost[] }>({
     endpoint: 'blog',
@@ -27,11 +21,6 @@ export default async function BlogPage() {
 
   // 3b. noteから全記事のデータを取得
   const allNoteArticles = await getNoteFeed();
-
-  // --- ▲ 3. MicroCMSとnoteの両方から全データを取得 ▲ ---
-
-
-  // --- ▼ 4. データを「共通の型 (MergedArticle)」に変換 ▼ ---
 
   // 4a. MicroCMSの記事を変換
   const internalArticles: MergedArticle[] = blogData.contents.map((post) => ({
@@ -55,21 +44,15 @@ export default async function BlogPage() {
     category: '外部記事 (note)',
   }));
 
-  // --- ▲ 4. データを「共通の型 (MergedArticle)」に変換 ▲ ---
-
-
-  // --- ▼ 5. 2つのリストを合体させ、日付（新着順）で並び替え ▼ ---
+  // 5. 2つのリストを合体させ、日付（新着順）で並び替え
   const allMergedArticles = [...internalArticles, ...noteArticles].sort(
     (a, b) =>
       new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   );
-  // --- (※ホームページと違い、.slice(0, 3) を使わない) ---
 
   return (
     <div className="bg-white py-16 sm:py-24">
       <div className="container mx-auto max-w-5xl px-4">
-        
-        {/* --- ▼ 6. タイトルとサブタイトルを修正 ▼ --- */}
         <div className="text-center">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             News
@@ -78,12 +61,9 @@ export default async function BlogPage() {
             新着情報 & 外部記事
           </p>
         </div>
-        {/* --- ▲ 6. タイトルとサブタイトルを修正 ▲ --- */}
 
-        {/* --- ▼ 7. 合体・並び替え後のリストでループ処理 ▼ --- */}
         <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
           {allMergedArticles.map((post) => {
-            // 記事カード全体をリンクにするか、ただのdivにするかを決める
             const CardWrapper =
               post.sourceType === 'note'
                 ? ({ children }: { children: React.ReactNode }) => (
@@ -106,7 +86,6 @@ export default async function BlogPage() {
               <CardWrapper key={post.id}>
                 <div className="group overflow-hidden rounded-lg border border-gray-200 shadow-sm transition-shadow hover:shadow-lg">
                   <div className="relative h-40 w-full overflow-hidden">
-                    {/* 共通の post.thumbnail を使用 */}
                     {post.thumbnail ? (
                       <Image
                         src={post.thumbnail}
@@ -120,14 +99,12 @@ export default async function BlogPage() {
                     )}
                   </div>
                   <div className="p-6">
-                    {/* 共通の post.category を使用 */}
                     <p className="text-sm text-blue-600">
                       {post.sourceType === 'note' ? '外部記事 (note)' : post.category}
                     </p>
                     <h3 className="mt-2 text-lg font-bold text-gray-900 transition-colors group-hover:text-blue-600 line-clamp-3">
                       {post.title}
                     </h3>
-                    {/* 共通の post.publishedAt を使用 */}
                     {post.publishedAt && (
                       <p className="mt-4 text-sm text-gray-500">
                         {format(new Date(post.publishedAt), 'yyyy年M月d日')}
@@ -139,10 +116,6 @@ export default async function BlogPage() {
             );
           })}
         </div>
-        {/* --- ▲ 7. 合体・並び替え後のリストでループ処理 ▲ --- */}
-
-        {/* --- 8. 「すべての記事を見る」ボタンは、一覧ページ自体には不要なので削除 --- */}
-
       </div>
     </div>
   );

@@ -7,19 +7,14 @@ import { Features } from '@/components/home/Features';
 import { BlogPreview } from '@/components/home/BlogPreview';
 import { client } from '@/libs/microcms';
 import { ScrollAnimation } from '@/components/common/ScrollAnimation';
-
-// --- ▼ 2行追加 (型とnote取得ロジック) ▼ ---
 import { getNoteFeed } from '@/libs/noteFeed';
-import { MicroCMSPost, NoteArticle, MergedArticle } from '@/types'; 
-// --- ▲ 2行追加 ▲ ---
 
-// --- ▼ 削除 ▼ ---
-// import { NoteFeed } from '@/components/home/NoteFeed'; // ◀ 削除 (BlogPreviewに統合するため)
-// --- ▲ 削除 ▲ ---
-
+// --- ▼ 修正 ▼ ---
+// 'NoteArticle' を削除（このファイルでは使われていないため）
+import { MicroCMSPost, MergedArticle } from '@/types';
+// --- ▲ 修正 ▲ ---
 
 export default async function Home() {
-
   // --- ▼ 1. MicroCMSの記事を取得 ▼ ---
   const blogData = await client.get<{ contents: MicroCMSPost[] }>({
     endpoint: 'blog',
@@ -62,7 +57,6 @@ export default async function Home() {
   // --- ▼ 5. ご要望通り、最新3件だけを取得 ▼ ---
   const latestThreeMergedArticles = allMergedArticles.slice(0, 3);
 
-
   return (
     <>
       <ScrollAnimation animation="slide-in-left">
@@ -78,17 +72,9 @@ export default async function Home() {
         <Features />
       </ScrollAnimation>
 
-      {/* --- ▼ 修正 ▼ --- */}
-      {/* 2つあったセクションを1つに統合 */}
       <ScrollAnimation animation="slide-in-left">
-        {/* 並び替えた最新3件のリストを BlogPreview に渡す */}
         <BlogPreview posts={latestThreeMergedArticles} />
       </ScrollAnimation>
-      {/* --- ▲ 修正 ▲ --- */}
-      
-      {/* --- ▼ 削除 ▼ --- */}
-      {/* NoteFeedコンポーネントは不要になったので削除 */}
-      {/* --- ▲ 削除 ▲ --- */}
     </>
   );
 }
