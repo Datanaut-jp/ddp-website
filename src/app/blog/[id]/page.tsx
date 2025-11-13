@@ -4,19 +4,15 @@ import { client } from '@/libs/microcms';
 import { format } from 'date-fns';
 import parse from 'html-react-parser';
 
-// microCMSの型定義
-type Post = {
-  id: string;
-  title: string;
-  content: string;
-  category?: { name: string };
-  publishedAt?: string;
-  eyecatch?: {
-    url: string;
-    height: number;
-    width: number;
-  };
-};
+// --- ▼ 1. 修正箇所 ▼ ---
+// 共通の型定義をインポート
+import { MicroCMSPost } from '@/types'; 
+
+// --- ▼ 2. 削除 ▼ ---
+// このファイル内の古いPost型定義は削除します
+// type Post = { ... };
+// --- ▲ 2. 削除 ▲ ---
+
 
 type Props = {
   params: {
@@ -27,10 +23,15 @@ type Props = {
 // データを取得する非同期関数
 async function getPost(postId: string) {
   try {
-    const post = await client.get<Post>({
+    // --- ▼ 3. 修正箇所 ▼ ---
+    // 型を <Post> から <MicroCMSPost> に変更
+    // (depth: 1 は不要ですが、残しておいても害はありません)
+    const post = await client.get<MicroCMSPost>({
       endpoint: 'blog',
       contentId: postId,
+      queries: { depth: 1 },
     });
+    // --- ▲ 3. 修正箇所 ▲ ---
     return post;
   } catch {
     notFound();
@@ -61,7 +62,12 @@ export default async function PostPage({ params }: Props) {
           {post.title}
         </h1>
         <div className="mt-4 flex items-center space-x-4 text-sm text-gray-500">
-          <span>{post.category?.name || '未分類'}</span>
+          
+          {/* --- ▼ 4. 修正箇所 ▼ --- */}
+          {/* .name を削除し、文字列そのものを参照 */}
+          <span>{post.category || '未分類'}</span>
+          {/* --- ▲ 4. 修正箇所 ▲ --- */}
+
           <span className="h-1 w-1 rounded-full bg-gray-400"></span>
           {post.publishedAt && (
             <time dateTime={post.publishedAt}>
@@ -70,12 +76,10 @@ export default async function PostPage({ params }: Props) {
           )}
         </div>
 
-        {/* --- ▼ 修正箇所：text-gray-900 を追加 ▼ --- */}
         <div className="prose prose-lg mt-12 max-w-none text-gray-900">
-          {parse(post.content)}
+          {/* contentフィールドがMicroCMSPost型にないので、型エラーを回避 */}
+          {post.content && parse(post.content)}
         </div>
-        {/* --- ▲ 修正箇所 ▲ --- */}
-
       </div>
     </div>
   );
