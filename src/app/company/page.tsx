@@ -29,16 +29,15 @@ const PageHeader = () => (
 
 const ProfileTable = () => {
   const profileItems: { term: string; description: ReactNode }[] = [
-    { term: '会社名（商号）', description: '株式会社datanaut' },
-    { term: '設立年月日', description: 'YYYY年MM月DD日' },
-    { term: '代表者', description: '代表取締役 藤本 和海' },
-    { term: '所在地', description: '〒XXX-XXXX 東京都〇〇区〇〇 X-X-X 〇〇ビルX階' },
-    { term: '役員構成', description: '取締役 〇〇 〇〇' },
-    { term: '資本金', description: 'X,XXX,XXX円' },
-    { term: '連絡先', description: 'TEL: XX-XXXX-XXXX / FAX: XX-XXXX-XXXX' },
-    { term: 'ウェブサイトURL', description: 'https://www.datanaut.jp' }, // 仮
-    { term: '取引銀行', description: '〇〇銀行 〇〇支店' },
-    { term: '許認可・登録', description: 'プライバシーマーク登録番号：第XXXXXXXX号' },
+    { term: '会社名（商号）', description: 'Datanaut合同会社' }, // 株式会社 -> 合同会社 に修正
+    { term: '設立年月日', description: 'XXXX年XX月XX日' }, 
+    { term: '代表者', description: '橋本 玖都' },
+    { term: '所在地', description: '〒150-0021 東京都渋谷区恵比寿西二丁目8番4号 EX恵比寿西ビル5階' },
+    // 電話番号と役員構成は削除
+    { term: '資本金', description: 'XXX万円' }, 
+    { term: 'ウェブサイトURL', description: 'https://www.datanaut.jp' },
+    { term: '取引銀行', description: 'XXXXXXX' }, 
+    // 許認可は情報がないため一旦削除（必要であれば戻します）
   ];
 
   return (
@@ -71,16 +70,16 @@ export default function CompanyPage() {
                 データで、未来の羅針盤を創る。
               </h2>
               <div className="mt-8 text-lg leading-9 text-gray-700 text-left space-y-6">
-                <p>株式会社datanautのウェブサイトへお越しいただき、誠にありがとうございます。</p>
-                <p>代表取締役の藤本 和海です。</p>
-                <p>情報が溢れる現代社会。多くの企業が、膨大なデータという宝の山を前に、その活用法を見出せずにいます。私たちは、この状況に風穴を開け、データが持つ無限の可能性を解放したい。その一つの熱い想いを原動力に、株式会社datanautを創業いたしました。</p>
+                <p>Datanaut合同会社のウェブサイトへお越しいただき、誠にありがとうございます。</p>
+                <p>CEOの橋本 玖都です。</p>
+                <p>情報が溢れる現代社会。多くの企業が、膨大なデータという宝の山を前に、その活用法を見出せずにいます。私たちは、この状況に風穴を開け、データが持つ無限の可能性を解放したい。その一つの熱い想いを原動力に、Datanaut合同会社を創業いたしました。</p>
                 <p>私たちの使命は、単なるデータ分析ではありません。ビジネスという予測不能な大海原を航海するすべての挑戦者へ、「データという、最高精度の羅針盤を提供する」こと。それが私たちの存在意義であると確信しています。</p>
                 <p>勘や経験だけに頼るのではなく、客観的なデータに基づいた確かな一手で未来を切り拓く。そのために私たちは、お客様一社一社の課題に深く、熱く、寄り添うコンサルティングに全力を注いでいます。それは単なるツール提供ではなく、お客様のビジョンを共有し、成功という目的地まで共に汗をかく「パートナー」としての挑戦です。</p>
                 <p>データが指し示す先には、私たちがまだ見ぬビジネスチャンスが、そして想像するだけでワクワクするような未来が広がっています。私たちはデータの力で人と企業のポテンシャルを最大化し、誰もが自信を持って未来へ一歩を踏み出せる社会を創造します。</p>
                 <p>この情熱を胸に、私たちは挑戦を止めません。常識を打ち破り、未来を切り拓くdatanautの航海に、どうぞご期待ください。今後とも、皆様の変わらぬご支援とご指導を賜りますよう、心よりお願い申し上げます。</p>
                 <div className="pt-6 text-right">
-                  <p>株式会社datanaut</p>
-                  <p>代表取締役　藤本 和海</p>
+                  <p>Datanaut合同会社</p>
+                  <p>CEO　橋本 玖都</p>
                 </div>
               </div>
             </div>
