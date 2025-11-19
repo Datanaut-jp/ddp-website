@@ -1,3 +1,5 @@
+import React from 'react'
+
 const PageHeader = () => (
   <div className="border-b border-gray-200 bg-white">
     <div className="container mx-auto max-w-5xl px-4 py-16 text-center">
@@ -79,7 +81,7 @@ export default function TermsPage() {
               <ol>
                 <li>本規約の解釈にあたっては、日本法を準拠法とします。</li>
                 <li>
-                  本サービスに関して紛争が生じた場合には、当社の本店所在地を管轄する裁判所【例：東京地方裁判所】を第一審の専属的合意管轄裁判所とします。
+                  本サービスに関して紛争が生じた場合には、当社の本店所在地を管轄する裁判所を第一審の専属的合意管轄裁判所とします。
                 </li>
               </ol>
 

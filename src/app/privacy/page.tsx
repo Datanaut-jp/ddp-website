@@ -1,3 +1,5 @@
+import React from 'react'
+
 const PageHeader = () => (
   <div className="border-b border-gray-200 bg-white">
     <div className="container mx-auto max-w-5xl px-4 py-16 text-center">
@@ -113,14 +115,14 @@ export default function PrivacyPolicyPage() {
 
               <h2>第10条（お問い合わせ窓口）</h2>
               <p>
-                本ポリシーに関するお問い合わせは、下記の窓口までお願いいたします。
+                本ポリシーに関するお問い合わせは、相談窓口までお願いいたします。
               </p>
               <address className="not-italic">
                 事業者名：Datanaut合同会社
                 <br />
-                住所：【お客様の会社の正式な住所を記載してください】
+                住所：〒150-0021 東京都渋谷区恵比寿西二丁目8番4号 EX恵比寿西ビル5階
                 <br />
-                Eメールアドレス：【お客様のお問い合わせ用メールアドレスを記載してください】
+                Eメールアドレス：info@datanaut.jp
               </address>
             </article>
           </div>
