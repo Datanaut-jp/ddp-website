@@ -1,4 +1,4 @@
-import Link from 'next/link';
+// import Link from 'next/link';  <-- この行を削除しました
 
 export const CTASection = () => {
   return (
