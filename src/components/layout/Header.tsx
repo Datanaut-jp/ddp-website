@@ -47,7 +47,7 @@ export const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
-      <div className="container mx-auto flex h-20 items-center justify-between px-4">
+      <div className="container mx-auto flex h-17 items-center justify-between px-4">
         {/* ロゴ */}
         <Link href="/" className="flex items-center">
           <Image
@@ -61,8 +61,8 @@ export const Header = () => {
           <Image
             src="/images/logo-icon-color.svg"
             alt="Datanaut ロゴ"
-            width={44}
-            height={44}
+            width={40}
+            height={40}
             className="block md:hidden"
             priority
           />
@@ -151,7 +151,7 @@ export const Header = () => {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-10 w-10"
+              className="h-8 w-8"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
