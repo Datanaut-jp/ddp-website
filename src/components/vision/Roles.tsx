@@ -40,26 +40,29 @@ const RoleIcon = () => (
 // Rolesセクション本体
 export const Roles = () => {
   return (
-    <section className="bg-white py-16 sm:py-24">
+    <section className="bg-white py-10 sm:py-14">
       <div className="container mx-auto max-w-5xl px-4">
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-blue-600">Our Roles</h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Datanautの役割
           </p>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
-            私たちは、データという広大な宇宙を旅するお客様の航海士として、様々な役割を担い、ビジネスの成功をナビゲートします。
+          <p className="mt-4 text-lg leading-8 text-gray-600">
+            私たちは、データという広大な宇宙を旅するお客様の航海士として、
+            様々な役割を担い、ビジネスの成功をナビゲートします。
           </p>
         </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
+
+        {/* ▼ ここを縮めた */}
+        <div className="mx-auto mt-10 max-w-2xl sm:mt-12 lg:mt-14 lg:max-w-none">
+          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-12 lg:max-w-none lg:grid-cols-2">
             {roles.map((role) => (
               <div key={role.name} className="flex flex-col">
                 <dt className="flex items-center gap-x-3 text-lg font-semibold leading-7 text-gray-900">
                   <RoleIcon />
                   {role.name}
                 </dt>
-                <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
+                <dd className="mt-3 flex flex-auto flex-col text-base leading-7 text-gray-600">
                   <p className="flex-auto">{role.description}</p>
                 </dd>
               </div>
@@ -69,4 +72,4 @@ export const Roles = () => {
       </div>
     </section>
   );
-}
+};
