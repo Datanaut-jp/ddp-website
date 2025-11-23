@@ -1,7 +1,6 @@
 'use client'
 
 import { ScrollAnimation } from '@/components/common/ScrollAnimation'
-import Script from 'next/script'
 import Image from 'next/image'
 
 // PageHeader（変更なし）
