@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { ScrollAnimation } from '@/components/common/ScrollAnimation';
+import Link from 'next/link'
+import { ScrollAnimation } from '@/components/common/ScrollAnimation'
 
 // PageHeaderコンポーネント（変更なし）
 const PageHeader = () => (
@@ -13,10 +13,18 @@ const PageHeader = () => (
       </p>
     </div>
   </div>
-);
+)
 
 // 各サービスセクション用のコンポーネント（ホバーアニメーションを更新）
-const ServiceSection = ({ title, href, children }: { title: string, href: string, children: React.ReactNode }) => (
+const ServiceSection = ({
+  title,
+  href,
+  children,
+}: {
+  title: string
+  href: string
+  children: React.ReactNode
+}) => (
   <ScrollAnimation>
     <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
       <div className="md:col-span-1">
@@ -25,17 +33,17 @@ const ServiceSection = ({ title, href, children }: { title: string, href: string
           <h2 className="link-underline text-2xl font-black text-blue-600 transition-colors duration-300 ease-out group-hover:text-blue-700">
             {title}
           </h2>
-          <span className="text-blue-600 opacity-0 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-x-2">
+          <span className="text-blue-600 opacity-0 transition-all duration-300 ease-out group-hover:translate-x-2 group-hover:opacity-100">
             →
           </span>
         </Link>
       </div>
-      <div className="md:col-span-2 space-y-4 text-lg text-gray-700">
+      <div className="space-y-4 text-lg text-gray-700 md:col-span-2">
         {children}
       </div>
     </div>
   </ScrollAnimation>
-);
+)
 
 export default function ServicePage() {
   return (
@@ -43,20 +51,23 @@ export default function ServicePage() {
       <PageHeader />
 
       <div className="py-16 sm:py-24">
-        <div className="container mx-auto max-w-5xl px-4 space-y-16">
-
-          <ServiceSection title="業務効率化とDX推進支援" href="/service/dx-support">
+        <div className="container mx-auto max-w-5xl space-y-16 px-4">
+          <ServiceSection
+            title="AI活用とデータ整備による業務自動化支援"
+            href="/service/dx-support"
+          >
             <p>
               SFA（営業支援）やMA（マーケティング自動化）といったITツールについて、その価値や適切な活用法を分かりやすくお伝えし、選定から導入、定着までをワンストップで支援します。
             </p>
-            <p>
-              これにより、抜本的な業務効率化を実現します。
-            </p>
+            <p>これにより、抜本的な業務効率化を実現します。</p>
           </ServiceSection>
 
           <div className="border-b border-gray-200"></div>
 
-          <ServiceSection title="中小企業診断士事務所" href="/service/sme-consultant">
+          <ServiceSection
+            title="中小企業診断士事務所"
+            href="/service/sme-consultant"
+          >
             <p>
               IT導入やDX推進に際し、まだ広く知られていない制度も含めて、お客様が活用できる最適な補助金・助成金をご提案します。
             </p>
@@ -64,7 +75,6 @@ export default function ServicePage() {
               複雑な申請手続きを専門家としてサポートすることで、情報格差による機会損失を防ぎ、お客様の投資負担を軽減します。
             </p>
           </ServiceSection>
-
         </div>
       </div>
 
