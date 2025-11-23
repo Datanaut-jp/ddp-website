@@ -2,14 +2,14 @@
 
 import { ScrollAnimation } from '@/components/common/ScrollAnimation'
 import Script from 'next/script'
-import Image from 'next/image' // Imageコンポーネントをインポート
+import Image from 'next/image'
 
-// PageHeaderを背景画像対応のデザインに更新
+// PageHeader（変更なし）
 const PageHeader = () => (
   <div className="relative bg-gray-900">
     <div className="absolute inset-0">
       <Image 
-        src="/images/company-background.jpg" // 共通の背景画像を指定
+        src="/images/company-background.jpg"
         alt="Contact background"
         fill
         className="object-cover opacity-30"
@@ -27,26 +27,24 @@ const PageHeader = () => (
   </div>
 )
 
-// HubSpotフォーム埋め込み用コンポーネント（変更なし）
-const HubSpotForm = () => {
+// Googleフォーム埋め込みコンポーネント
+const GoogleForm = () => {
   return (
-    <>
-      <div
-        className="hs-form-frame"
-        data-region="na1"
-        data-form-id="d59791dd-02f2-49f1-b9b3-4046aacb2b6e"
-        data-portal-id="48547585"
-      ></div>
-      <Script
-        src="https://js.hsforms.net/forms/embed/48547585.js"
-        strategy="afterInteractive"
-        async
-        defer
-      />
-    </>
-  );
-};
-
+    <div className="w-full">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSfMQBwcSVN0ZIjrOCEGxLaLmqU-kaF0EWJdTpBDMkMm2nOUIA/viewform?embedded=true"
+        width="640"
+        height="1449"
+        frameBorder="0"
+        marginHeight={0}
+        marginWidth={0}
+        className="w-full"
+      >
+        読み込んでいます…
+      </iframe>
+    </div>
+  )
+}
 
 export default function ContactPage() {
   return (
@@ -56,7 +54,7 @@ export default function ContactPage() {
         <div className="container mx-auto max-w-2xl px-4">
           <ScrollAnimation>
             <div className="rounded-2xl bg-white p-6 shadow-2xl sm:p-10">
-              <HubSpotForm />
+              <GoogleForm />
             </div>
           </ScrollAnimation>
         </div>
