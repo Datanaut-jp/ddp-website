@@ -7,17 +7,19 @@ export default function ServicePage() {
       {/* 1. ヒーローセクション */}
       <div className="bg-gray-900 py-24 sm:py-32">
         <div className="container mx-auto max-w-5xl px-4 text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          {/* 修正: スマホでデカすぎないように text-3xl からスタート */}
+          <h1 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">
             Service & Price
           </h1>
-          <p className="mt-6 text-xl leading-8 text-gray-300">
+          <p className="mt-6 text-lg leading-8 text-gray-300 sm:text-xl">
             AI導入は、小さく試して、大きく育てる。
-            <br />
+            {/* 修正: スマホでは改行せず、PC以上(sm)でのみ改行する */}
+            <br className="hidden sm:block" />
             貴社のデータ環境に合わせた、無駄のない自動化プランをご提案します。
           </p>
-          <p className="mt-4 text-base text-gray-400">
+          <p className="mt-4 text-sm text-gray-400 sm:text-base">
             datanautは、決まりきったパッケージの押し売りはいたしません。
-            <br />
+            <br className="hidden sm:block" />
             「まずはプロンプト1本から」「本格的なシステム連携まで」、お客様のフェーズに合わせたオーダーメイド開発を提供します。
           </p>
         </div>
@@ -30,26 +32,31 @@ export default function ServicePage() {
             <div className="absolute top-0 right-0 z-10 rounded-bl-lg bg-red-500 px-4 py-1 text-xs font-bold text-white">
               初回限定キャンペーン
             </div>
-            <div className="p-8 sm:p-10">
+            <div className="p-6 sm:p-10">
               <div className="text-center">
-                <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-                  🚀 プロンプトエンジニアリング「お試し」パッケージ
+                {/* 修正: 文字サイズ調整と行間の最適化(leading-tight) */}
+                <h2 className="text-xl font-bold leading-tight text-gray-900 sm:text-3xl">
+                  🚀 プロンプトエンジニアリング
+                  <br className="block sm:hidden" /> {/* スマホだけここで改行させると綺麗かも */}
+                  「お試し」パッケージ
                 </h2>
-                <p className="mt-4 text-gray-600">
+                <p className="mt-4 text-sm text-gray-600 sm:text-base">
                   「AIを業務に使いたいが、どう指示すればいいか分からない」「精度が出ない」という方へ。
-                  <br />
+                  <br className="hidden sm:block" />
                   貴社の実業務に即した、すぐに使える堅牢なプロンプトを作成します。
                 </p>
               </div>
               <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
                 <div className="rounded-lg bg-gray-50 p-6">
                   <h3 className="font-semibold text-gray-900">価格</h3>
-                  <p className="mt-2 text-3xl font-bold text-blue-600">
-                    ¥30,000{' '}
-                    <span className="text-sm font-normal text-gray-500">
+                  <div className="mt-2">
+                    <span className="text-3xl font-bold text-blue-600">
+                      ¥30,000
+                    </span>{' '}
+                    <span className="block text-sm font-normal text-gray-500 sm:inline">
                       (税別) / 1セット *要相談
                     </span>
-                  </p>
+                  </div>
                   <p className="mt-2 text-xs text-gray-500">
                     ※初回のお取引に限らせていただきます。
                   </p>
@@ -59,11 +66,14 @@ export default function ServicePage() {
                   <ul className="mt-4 list-inside list-disc space-y-3 text-sm text-gray-600">
                     <li>業務ヒアリング (30分)：解決したいタスクの特定</li>
                     <li>
-                      プロンプト設計 (3本)：例）メール生成、要約、アイデア出し等
+                      プロンプト設計 (3本)：
+                      <span className="block pl-5 sm:inline sm:pl-0">
+                        例）メール生成、要約、アイデア出し等
+                      </span>
                     </li>
                     <li>精度検証・修正 (1回)：実際に使ってみての微調整</li>
                   </ul>
-                  <p className="mt-4 text-xs text-gray-500">
+                  <p className="mt-4 text-xs text-gray-500 break-words">
                     対象: ChatGPT (Plus/Team/Enterprise), Claude, Gemini 等
                   </p>
                 </div>
@@ -77,7 +87,7 @@ export default function ServicePage() {
       <section className="py-16 sm:py-24">
         <div className="container mx-auto max-w-5xl px-4">
           <SectionTitle title="Model Cases" subtitle="代表的な開発事例" />
-          <p className="mb-12 text-center text-gray-600">
+          <p className="mb-12 text-center text-sm text-gray-600 sm:text-base">
             お客様の課題に近い事例から、費用感（目安）をご確認いただけます。
           </p>
 
@@ -85,8 +95,10 @@ export default function ServicePage() {
             {/* Case 01 */}
             <div className="rounded-xl border border-gray-200 p-6 shadow-sm transition-shadow hover:shadow-md">
               <span className="text-sm font-bold text-blue-600">Case 01</span>
-              <h3 className="mt-2 text-xl font-bold text-gray-900">
-                ハイパー・パーソナライズメール生成
+              <h3 className="mt-2 text-lg font-bold leading-snug text-gray-900 sm:text-xl">
+                ハイパー・パーソナライズ
+                <br className="inline sm:hidden" />
+                メール生成
               </h3>
               <p className="mt-2 text-sm text-gray-600">
                 顧客1社1社に合わせて「刺さる」文面を自動生成。
@@ -117,8 +129,10 @@ export default function ServicePage() {
             {/* Case 02 */}
             <div className="rounded-xl border border-gray-200 p-6 shadow-sm transition-shadow hover:shadow-md">
               <span className="text-sm font-bold text-blue-600">Case 02</span>
-              <h3 className="mt-2 text-xl font-bold text-gray-900">
-                インサイドセールス「トークレコメンド」
+              <h3 className="mt-2 text-lg font-bold leading-snug text-gray-900 sm:text-xl">
+                インサイドセールス
+                <br className="inline sm:hidden" />
+                「トークレコメンド」
               </h3>
               <p className="mt-2 text-sm text-gray-600">
                 トップセールスの「切り返し」を、新人が再現可能に。
@@ -150,8 +164,10 @@ export default function ServicePage() {
             {/* Case 03 */}
             <div className="rounded-xl border border-gray-200 p-6 shadow-sm transition-shadow hover:shadow-md">
               <span className="text-sm font-bold text-blue-600">Case 03</span>
-              <h3 className="mt-2 text-xl font-bold text-gray-900">
-                商談・製品・応答品質フィードバックの自動抽出 (VoC)
+              <h3 className="mt-2 text-lg font-bold leading-snug text-gray-900 sm:text-xl">
+                商談・製品・応答品質
+                <br className="inline sm:hidden" />
+                フィードバックの自動抽出 (VoC)
               </h3>
               <p className="mt-2 text-sm text-gray-600">
                 録画データの山から、&quot;顧客の悲鳴&quot;と&quot;機能要望&quot;だけを抽出。
@@ -189,9 +205,9 @@ export default function ServicePage() {
             title="Chatbot Development"
             subtitle="チャットボット開発"
           />
-          <p className="mb-12 text-center text-gray-600">
+          <p className="mb-12 text-center text-sm text-gray-600 sm:text-base">
             「学習させるデータの深さ」でプランが変わります。
-            <br />
+            <br className="hidden sm:block" />
             社内ナレッジ活用やFAQ対応など、ご希望のデータ連携レベルに合わせてお選びください。
           </p>
 
@@ -199,7 +215,6 @@ export default function ServicePage() {
           <div className="overflow-x-auto pb-4">
             <div className="grid min-w-[800px] grid-cols-3 gap-4">
               {/* Level 1 */}
-              {/* 変更点: flex flex-col を追加 */}
               <div className="rounded-lg border-t-4 border-gray-400 bg-white p-6 shadow-sm flex flex-col">
                 <h3 className="text-lg font-bold text-gray-900">
                   Level 1: 定型QAボット
@@ -207,7 +222,6 @@ export default function ServicePage() {
                 <p className="mt-2 text-sm text-gray-600">
                   スモールスタートに最適
                 </p>
-                {/* 変更点: flex-1 を追加（ここで高さを調整し、下部を押し下げる） */}
                 <div className="mt-6 space-y-4 text-sm flex-1">
                   <div>
                     <span className="block text-xs font-semibold text-gray-500 uppercase">
@@ -241,7 +255,6 @@ export default function ServicePage() {
               </div>
 
               {/* Level 2 (RAG) */}
-              {/* 変更点: flex flex-col を追加 */}
               <div className="relative z-10 rounded-lg border-t-4 border-blue-500 bg-white p-6 shadow-sm flex flex-col">
                 <div className="absolute top-1 right-4 rounded-full bg-blue-500 px-2 py-1 text-xs text-white">
                   おすすめ
@@ -252,7 +265,6 @@ export default function ServicePage() {
                 <p className="mt-2 text-sm text-gray-600">
                   最も費用対効果が高い
                 </p>
-                {/* 変更点: flex-1 を追加 */}
                 <div className="mt-6 space-y-4 text-sm flex-1">
                   <div>
                     <span className="block text-xs font-semibold text-gray-500 uppercase">
@@ -290,7 +302,6 @@ export default function ServicePage() {
               </div>
 
               {/* Level 3 */}
-              {/* 変更点: flex flex-col を追加 */}
               <div className="rounded-lg border-t-4 border-indigo-600 bg-white p-6 shadow-sm flex flex-col">
                 <h3 className="text-lg font-bold text-gray-900">
                   Level 3: データベース連携
@@ -298,7 +309,6 @@ export default function ServicePage() {
                 <p className="mt-2 text-sm text-gray-600">
                   高度なセキュリティ設計込み
                 </p>
-                {/* 変更点: flex-1 を追加 */}
                 <div className="mt-6 space-y-4 text-sm flex-1">
                   <div>
                     <span className="block text-xs font-semibold text-gray-500 uppercase">
@@ -337,7 +347,6 @@ export default function ServicePage() {
       <section className="py-16 sm:py-24">
         <div className="container mx-auto max-w-4xl px-4">
           <SectionTitle title="Basic Menu" subtitle="基本料金表" />
-          {/* 追加：説明文 */}
           <p className="mt-4 mb-8 text-center text-sm text-gray-600">
             開発以外のスポット支援メニューです。
           </p>
@@ -396,10 +405,10 @@ export default function ServicePage() {
       {/* 6. Security & Policy */}
       <section className="bg-gray-900 py-16 text-white">
         <div className="container mx-auto max-w-4xl px-4">
-          <h2 className="mb-8 text-center text-2xl font-bold">
+          <h2 className="mb-8 text-center text-xl font-bold sm:text-2xl">
             Security & Policy（安心への取り組み）
           </h2>
-          <p className="mb-8 text-center text-gray-400">
+          <p className="mb-8 text-center text-gray-400 text-sm sm:text-base">
             企業様のデータを扱うプロフェッショナルとして、以下のポリシーを遵守します。
           </p>
           <div className="grid gap-6 text-center md:grid-cols-3">
@@ -437,12 +446,12 @@ export default function ServicePage() {
       {/* 7. CTA */}
       <section className="py-12">
         <div className="container mx-auto max-w-4xl px-4 text-center">
-          <h2 className="mb-6 text-2xl font-bold text-black">
+          <h2 className="mb-6 text-xl font-bold text-black sm:text-2xl">
             あなたの業務も、自動化できるか診断しませんか？
           </h2>
-          <p className="mb-6 text-gray-600">
+          <p className="mb-6 text-sm text-gray-600 sm:text-base">
             現状の業務フローや、連携したいデータの種類をお聞かせください。
-            <br />
+            <br className="hidden sm:block" />
             「キャンペーン希望」や「とりあえず概算を知りたい」というご相談も歓迎です。
           </p>
           <div className="inline-block">
