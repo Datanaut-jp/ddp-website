@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { ScrollAnimation } from '@/components/common/ScrollAnimation'
 import React from 'react'
 
-// このページで使うアイコンコンポーネント
+// アイコンコンポーネント
 const CheckIcon = () => (
   <svg
     className="h-6 w-6 flex-none text-blue-600"
@@ -20,28 +20,23 @@ const CheckIcon = () => (
     />
   </svg>
 )
-const FeatureIcon = ({ number }: { number: number }) => {
-  return (
-    <div className="relative h-12 w-12">
-      <svg
-        className="h-full w-full text-blue-600"
-        fill="none"
-        viewBox="0 0 64 64"
-      >
-        <path
-          stroke="currentColor"
-          strokeWidth="2"
-          d="M14 1H50C57.1797 1 63 6.8203 63 14V50C63 57.1797 57.1797 63 50 63H14C6.8203 63 1 57.1797 1 50V14C1 6.8203 6.8203 1 14 1Z"
-        />
-      </svg>
-      <span className="absolute inset-0 flex items-center justify-center text-xl font-bold text-blue-600">
-        {number}
-      </span>
-    </div>
-  )
-}
 
-// サービスデータの型を定義
+const FeatureIcon = ({ number }: { number: number }) => (
+  <div className="relative h-12 w-12">
+    <svg className="h-full w-full text-blue-600" fill="none" viewBox="0 0 64 64">
+      <path
+        stroke="currentColor"
+        strokeWidth="2"
+        d="M14 1H50C57.1797 1 63 6.8203 63 14V50C63 57.1797 57.1797 63 50 63H14C6.8203 63 1 57.1797 1 50V14C1 6.8203 6.8203 1 14 1Z"
+      />
+    </svg>
+    <span className="absolute inset-0 flex items-center justify-center text-xl font-bold text-blue-600">
+      {number}
+    </span>
+  </div>
+)
+
+// サービスデータ型
 type Service = {
   title: string
   titleImage?: string
@@ -50,7 +45,7 @@ type Service = {
   features: { name: string; description: string }[]
 }
 
-// 各サービスの詳細データ
+// サービスデータ
 const servicesData: { [key: string]: Service } = {
   'dx-support': {
     title: 'AI活用とデータ整備による業務自動化支援',
@@ -109,16 +104,15 @@ const servicesData: { [key: string]: Service } = {
   },
 }
 
-export default function ServiceDetailPage({
-  params,
-}: {
+interface ServiceDetailPageProps {
   params: { slug: string }
-}) {
-  const service = servicesData[params.slug]
+}
 
-  if (!service) {
-    notFound()
-  }
+export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
+  const slug = params.slug
+  const service = servicesData[slug]
+
+  if (!service) notFound()
 
   const steps = [
     '無料相談・ヒアリング',
@@ -129,7 +123,7 @@ export default function ServiceDetailPage({
 
   return (
     <div className="bg-white">
-      {/* 1. ページヘッダー */}
+      {/* ページヘッダー */}
       <div className="bg-gray-50">
         <div className="container mx-auto max-w-5xl px-4 py-16 text-center sm:py-24">
           <ScrollAnimation>
@@ -151,10 +145,22 @@ export default function ServiceDetailPage({
               {service.description}
             </p>
           </ScrollAnimation>
+
+          {/* 「準備中」セクションは dx-support 以外のみ表示 */}
+          {slug !== 'dx-support' && (
+            <div className="mt-12 flex min-h-[200px] flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-8 text-center">
+              <h3 className="text-xl font-semibold text-gray-900">準備中です</h3>
+              <p className="mt-2 text-gray-500">
+                現在、資料を作成中です。
+                <br />
+                公開準備が整い次第、こちらでご案内いたします。
+              </p>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* 2. 「こんな課題はありませんか？」セクション */}
+      {/* 課題セクション */}
       <div className="py-16 sm:py-24">
         <div className="container mx-auto max-w-3xl px-4">
           <ScrollAnimation>
@@ -164,10 +170,7 @@ export default function ServiceDetailPage({
             <div className="flex justify-center">
               <ul className="mt-8 space-y-4 text-lg text-gray-600">
                 {service.challenges.map((challenge, index) => (
-                  <li
-                    key={index}
-                    className="flex items-start whitespace-nowrap"
-                  >
+                  <li key={index} className="flex items-start whitespace-nowrap">
                     <CheckIcon />
                     <span className="ml-3">{challenge}</span>
                   </li>
@@ -178,7 +181,7 @@ export default function ServiceDetailPage({
         </div>
       </div>
 
-      {/* 3. サービスの特徴 */}
+      {/* 特徴セクション */}
       <div className="bg-gray-50 py-16 sm:py-24">
         <div className="container mx-auto max-w-5xl px-4">
           <ScrollAnimation>
@@ -192,17 +195,10 @@ export default function ServiceDetailPage({
             </div>
             <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
               {service.features.map((feature, index) => (
-                <div
-                  key={feature.name}
-                  className="flex flex-col items-center text-center"
-                >
+                <div key={feature.name} className="flex flex-col items-center text-center">
                   <FeatureIcon number={index + 1} />
-                  <h3 className="mt-5 text-xl font-semibold text-gray-900">
-                    {feature.name}
-                  </h3>
-                  <p className="mt-2 text-base text-gray-600">
-                    {feature.description}
-                  </p>
+                  <h3 className="mt-5 text-xl font-semibold text-gray-900">{feature.name}</h3>
+                  <p className="mt-2 text-base text-gray-600">{feature.description}</p>
                 </div>
               ))}
             </div>
@@ -210,7 +206,7 @@ export default function ServiceDetailPage({
         </div>
       </div>
 
-      {/* 4. ご支援の流れ */}
+      {/* ご支援の流れ */}
       <div className="py-16 sm:py-24">
         <div className="container mx-auto max-w-5xl px-4 text-center">
           <ScrollAnimation>
@@ -224,18 +220,13 @@ export default function ServiceDetailPage({
                     <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 font-bold text-white">
                       {index + 1}
                     </div>
-                    <p className="mt-2 text-lg font-medium text-gray-800">
-                      {step}
-                    </p>
+                    <p className="mt-2 text-lg font-medium text-gray-800">{step}</p>
                   </li>
-                  {/* ↓↓↓ このliタグのクラス名を修正しました ↓↓↓ */}
                   {index < steps.length - 1 && (
                     <li className="hidden flex-1 items-center sm:flex">
                       <div className="relative w-full">
                         <div className="w-full border-b-2 border-gray-300"></div>
-                        <div className="absolute top-1/2 -right-2 -translate-y-1/2 text-gray-300">
-                          ▶
-                        </div>
+                        <div className="absolute top-1/2 -right-2 -translate-y-1/2 text-gray-300">▶</div>
                       </div>
                     </li>
                   )}
@@ -246,7 +237,7 @@ export default function ServiceDetailPage({
         </div>
       </div>
 
-      {/* 5. CTAセクション */}
+      {/* CTAセクション */}
       <div className="bg-white">
         <div className="container mx-auto max-w-4xl px-4 py-16 text-center sm:py-20">
           <ScrollAnimation>
