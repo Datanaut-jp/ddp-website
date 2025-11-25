@@ -1,5 +1,4 @@
 import { SectionTitle } from '@/components/common/SectionTitle'
-// 修正1: 未使用の ScrollAnimation のインポートを削除しました
 import React from 'react'
 
 export default function ServicePage() {
@@ -154,7 +153,6 @@ export default function ServicePage() {
               <h3 className="mt-2 text-xl font-bold text-gray-900">
                 商談・製品・応答品質フィードバックの自動抽出 (VoC)
               </h3>
-              {/* 修正2: ダブルクォーテーションを &quot; にエスケープしました */}
               <p className="mt-2 text-sm text-gray-600">
                 録画データの山から、&quot;顧客の悲鳴&quot;と&quot;機能要望&quot;だけを抽出。
               </p>
@@ -201,14 +199,16 @@ export default function ServicePage() {
           <div className="overflow-x-auto pb-4">
             <div className="grid min-w-[800px] grid-cols-3 gap-4">
               {/* Level 1 */}
-              <div className="rounded-lg border-t-4 border-gray-400 bg-white p-6 shadow-sm">
+              {/* 変更点: flex flex-col を追加 */}
+              <div className="rounded-lg border-t-4 border-gray-400 bg-white p-6 shadow-sm flex flex-col">
                 <h3 className="text-lg font-bold text-gray-900">
                   Level 1: 定型QAボット
                 </h3>
                 <p className="mt-2 text-sm text-gray-600">
                   スモールスタートに最適
                 </p>
-                <div className="mt-6 space-y-4 text-sm">
+                {/* 変更点: flex-1 を追加（ここで高さを調整し、下部を押し下げる） */}
+                <div className="mt-6 space-y-4 text-sm flex-1">
                   <div>
                     <span className="block text-xs font-semibold text-gray-500 uppercase">
                       仕組み
@@ -240,9 +240,9 @@ export default function ServicePage() {
                 </div>
               </div>
 
-              {/* Level 2 (RAG) - badge lowered, design unified with others */}
-              <div className="relative z-10 rounded-lg border-t-4 border-blue-500 bg-white p-6 shadow-sm">
-                {/* badge: lowered to avoid overlap with rounded corner */}
+              {/* Level 2 (RAG) */}
+              {/* 変更点: flex flex-col を追加 */}
+              <div className="relative z-10 rounded-lg border-t-4 border-blue-500 bg-white p-6 shadow-sm flex flex-col">
                 <div className="absolute top-1 right-4 rounded-full bg-blue-500 px-2 py-1 text-xs text-white">
                   おすすめ
                 </div>
@@ -252,7 +252,8 @@ export default function ServicePage() {
                 <p className="mt-2 text-sm text-gray-600">
                   最も費用対効果が高い
                 </p>
-                <div className="mt-6 space-y-4 text-sm">
+                {/* 変更点: flex-1 を追加 */}
+                <div className="mt-6 space-y-4 text-sm flex-1">
                   <div>
                     <span className="block text-xs font-semibold text-gray-500 uppercase">
                       仕組み
@@ -289,14 +290,16 @@ export default function ServicePage() {
               </div>
 
               {/* Level 3 */}
-              <div className="rounded-lg border-t-4 border-indigo-600 bg-white p-6 shadow-sm">
+              {/* 変更点: flex flex-col を追加 */}
+              <div className="rounded-lg border-t-4 border-indigo-600 bg-white p-6 shadow-sm flex flex-col">
                 <h3 className="text-lg font-bold text-gray-900">
                   Level 3: データベース連携
                 </h3>
                 <p className="mt-2 text-sm text-gray-600">
                   高度なセキュリティ設計込み
                 </p>
-                <div className="mt-6 space-y-4 text-sm">
+                {/* 変更点: flex-1 を追加 */}
+                <div className="mt-6 space-y-4 text-sm flex-1">
                   <div>
                     <span className="block text-xs font-semibold text-gray-500 uppercase">
                       仕組み
