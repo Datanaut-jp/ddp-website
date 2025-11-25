@@ -25,7 +25,7 @@ export const Hero = () => {
     };
   }, []);
 
-  // 表示する日本語テキスト（1行目・2行目に分けてアニメーション）
+  // 表示する日本語テキスト
   const line1 = "データとAIで、";
   const line2 = 'ビジネスに「進化」の追い風を。';
 
@@ -63,7 +63,13 @@ export const Hero = () => {
       <div
         className="absolute z-10 top-[30%] left-1/2 -translate-x-1/2 md:top-1/2 md:-translate-y-1/2 w-full px-4 text-center"
       >
-        <h1 className="text-3xl font-bold tracking-wider sm:text-4xl md:text-6xl lg:text-7xl text-white leading-tight">
+        {/* 修正箇所: フォントサイズ調整
+            text-2xl: モバイル用（画像のサイズ感を維持）
+            sm:text-4xl: タブレット用
+            md:text-5xl: PC用 (以前の6xlから縮小)
+            lg:text-6xl: 大画面PC用 (以前の7xlから縮小)
+        */}
+        <h1 className="text-2xl font-bold tracking-wider sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
           {/* 1行目 */}
           <div className="whitespace-nowrap">
             {line1.split('').map((char, index) => (
