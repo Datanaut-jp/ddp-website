@@ -25,9 +25,9 @@ export const Hero = () => {
     };
   }, []);
 
-  // アニメーションさせるテキストを定義
-  const line1 = "CHARTING";
-  const line2 = "YOUR DATA UNIVERSE.";
+  // 表示する日本語テキスト（1行目・2行目に分けてアニメーション）
+  const line1 = "データとAIで、";
+  const line2 = 'ビジネスに「進化」の追い風を。';
 
   return (
     <section className="relative h-screen text-white overflow-hidden">
@@ -61,29 +61,29 @@ export const Hero = () => {
 
       {/* テキストとロゴのコンテンツ */}
       <div
-        className={`absolute z-10 top-[30%] left-1/2 -translate-x-1/2 md:top-1/2 md:-translate-y-1/2 w-full px-4 text-center`}
+        className="absolute z-10 top-[30%] left-1/2 -translate-x-1/2 md:top-1/2 md:-translate-y-1/2 w-full px-4 text-center"
       >
-        {/* ↓↓↓ ここのクラス名を修正しました ↓↓↓ */}
-        <h1 className="text-3xl font-bold tracking-wider sm:text-5xl sm:font-light md:text-7xl text-white">
+        <h1 className="text-3xl font-bold tracking-wider sm:text-4xl md:text-6xl lg:text-7xl text-white leading-tight">
           {/* 1行目 */}
           <div className="whitespace-nowrap">
             {line1.split('').map((char, index) => (
               <span
                 key={index}
-                className={`inline-block transition-all duration-500 ${showText ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                style={{ transitionDelay: `${index * 50}ms` }}
+                className={`inline-block transition-all duration-500 ${showText ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}
+                style={{ transitionDelay: `${index * 40}ms` }}
               >
                 {char === ' ' ? '\u00A0' : char}
               </span>
             ))}
           </div>
+
           {/* 2行目 */}
-          <div className="whitespace-nowrap">
+          <div className="whitespace-nowrap mt-2">
             {line2.split('').map((char, index) => (
               <span
                 key={index}
-                className={`inline-block transition-all duration-500 ${showText ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                style={{ transitionDelay: `${(line1.length + index) * 50}ms` }}
+                className={`inline-block transition-all duration-500 ${showText ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}
+                style={{ transitionDelay: `${(line1.length + index) * 40}ms` }}
               >
                 {char === ' ' ? '\u00A0' : char}
               </span>
@@ -92,7 +92,7 @@ export const Hero = () => {
         </h1>
 
         {/* ロゴはテキストアニメーション後に表示 */}
-        <div className={`mt-10 flex justify-center transition-opacity duration-1000 delay-1000 ${showText ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`mt-8 flex justify-center transition-opacity duration-700 ${showText ? 'opacity-100' : 'opacity-0'}`}>
           <Image
             src="/images/logo-full-white.svg"
             alt="Datanaut Logo"
@@ -104,7 +104,7 @@ export const Hero = () => {
 
       {/* スクロール矢印 */}
       <div
-        className={`absolute z-10 bottom-24 left-1/2 -translate-x-1/2 transition-opacity duration-1000 ${showScroll ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute z-10 bottom-20 left-1/2 -translate-x-1/2 transition-opacity duration-1000 ${showScroll ? 'opacity-100' : 'opacity-0'}`}
       >
         <div className="flex items-center space-x-2 text-sm font-light">
           <span style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>scroll.</span>

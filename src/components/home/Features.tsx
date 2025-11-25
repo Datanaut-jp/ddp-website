@@ -5,9 +5,7 @@ const FeatureCard = ({ iconSrc, title, children }: { iconSrc: string, title: str
   return (
     <div className="text-center">
       <div className="flex justify-center">
-        {/* ↓↓↓ アイコンを囲む円のサイズを h-16 w-16 に拡大しました ↓↓↓ */}
         <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-blue-600">
-          {/* ↓↓↓ アイコンの表示サイズを 40x40 に拡大しました ↓↓↓ */}
           <Image
             src={iconSrc}
             alt={`${title}のアイコン`}
@@ -39,14 +37,14 @@ export const Features = () => {
         </div>
 
         <div className="mt-16 grid grid-cols-1 gap-y-12 md:grid-cols-3 md:gap-x-8">
-          <FeatureCard title="伴走する航海士" iconSrc="/images/icon-navigator.svg">
-            お客様を孤独な航海にはさせません。中小企業診断士の資格を持つ専門家が良きパートナーとして、経営のゴールまで一緒に伴走します。
+          <FeatureCard title="実装まで担う、実務家の航海士" iconSrc="/images/icon-navigator.svg">
+            口だけのコンサルティングは行いません。私たちは、最新のAI技術とエンジニアリングスキルを持つ「実務家」です。戦略を描くだけでなく、実際のツール開発や環境構築まで、手を動かしてゴールまで伴走します。
           </FeatureCard>
-          <FeatureCard title="最適な航路を提示" iconSrc="/images/icon-map.svg">
-            勘や経験だけに頼る航海は終わりです。ITツールとデータを活用し、業務の地図を描き、ビジネスの成長に向けた最適な航路を提示します。
+          <FeatureCard title="「データ」という海図を整備する" iconSrc="/images/icon-map.svg">
+            勘や経験だけに頼る航海は終わりです。AI活用の土台となるのは、貴社の中に眠る「データ」です。私たちはデータの整理・整備（クリーニング）から入り、ビジネスの現状を正しく映し出す「正確な海図」を描き出します。
           </FeatureCard>
-          <FeatureCard title="航海の資源を確保" iconSrc="/images/icon-fuel.svg">
-            挑戦には燃料が必要です。お客様が活用できる最適な補助金・助成金を「燃料補給」と捉え、専門家としてリソース確保を強力に支援します。
+          <FeatureCard title="AIという「推進力」を手渡す" iconSrc="/images/icon-fuel.svg">
+            人手不足の時代、挑戦には新しいエネルギーが必要です。私たちは、チャットボットや業務自動化といったAI技術を、誰もが使える「武器（推進力）」として提供し、貴社のビジネススピードを劇的に加速させます。
           </FeatureCard>
         </div>
       </div>
