@@ -1,5 +1,5 @@
 import { SectionTitle } from '@/components/common/SectionTitle'
-import { ScrollAnimation } from '@/components/common/ScrollAnimation'
+// 修正1: 未使用の ScrollAnimation のインポートを削除しました
 import React from 'react'
 
 export default function ServicePage() {
@@ -154,8 +154,9 @@ export default function ServicePage() {
               <h3 className="mt-2 text-xl font-bold text-gray-900">
                 商談・製品・応答品質フィードバックの自動抽出 (VoC)
               </h3>
+              {/* 修正2: ダブルクォーテーションを &quot; にエスケープしました */}
               <p className="mt-2 text-sm text-gray-600">
-                録画データの山から、"顧客の悲鳴"と"機能要望"だけを抽出。
+                録画データの山から、&quot;顧客の悲鳴&quot;と&quot;機能要望&quot;だけを抽出。
               </p>
               <div className="mt-4 space-y-2 text-sm">
                 <p className="text-gray-800">
