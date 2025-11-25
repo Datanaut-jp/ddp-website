@@ -7,13 +7,11 @@ export default function ServicePage() {
       {/* 1. ヒーローセクション */}
       <div className="bg-gray-900 py-24 sm:py-32">
         <div className="container mx-auto max-w-5xl px-4 text-center">
-          {/* 修正: スマホでデカすぎないように text-3xl からスタート */}
           <h1 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">
             Service & Price
           </h1>
           <p className="mt-6 text-lg leading-8 text-gray-300 sm:text-xl">
             AI導入は、小さく試して、大きく育てる。
-            {/* 修正: スマホでは改行せず、PC以上(sm)でのみ改行する */}
             <br className="hidden sm:block" />
             貴社のデータ環境に合わせた、無駄のない自動化プランをご提案します。
           </p>
@@ -34,10 +32,9 @@ export default function ServicePage() {
             </div>
             <div className="p-6 sm:p-10">
               <div className="text-center">
-                {/* 修正: 文字サイズ調整と行間の最適化(leading-tight) */}
                 <h2 className="text-xl font-bold leading-tight text-gray-900 sm:text-3xl">
                   🚀 プロンプトエンジニアリング
-                  <br className="block sm:hidden" /> {/* スマホだけここで改行させると綺麗かも */}
+                  <br className="block sm:hidden" />
                   「お試し」パッケージ
                 </h2>
                 <p className="mt-4 text-sm text-gray-600 sm:text-base">
@@ -211,12 +208,12 @@ export default function ServicePage() {
             社内ナレッジ活用やFAQ対応など、ご希望のデータ連携レベルに合わせてお選びください。
           </p>
 
-          {/* スマホで横スクロール可能にするラッパー */}
           <div className="overflow-x-auto pb-4">
             <div className="grid min-w-[800px] grid-cols-3 gap-4">
               {/* Level 1 */}
               <div className="rounded-lg border-t-4 border-gray-400 bg-white p-6 shadow-sm flex flex-col">
-                <h3 className="text-lg font-bold text-gray-900">
+                {/* 修正: 文字サイズを text-lg から text-base (スマホ時) に変更して1行に収める */}
+                <h3 className="text-base font-bold text-gray-900 sm:text-lg">
                   Level 1: 定型QAボット
                 </h3>
                 <p className="mt-2 text-sm text-gray-600">
@@ -259,7 +256,8 @@ export default function ServicePage() {
                 <div className="absolute top-1 right-4 rounded-full bg-blue-500 px-2 py-1 text-xs text-white">
                   おすすめ
                 </div>
-                <h3 className="text-lg font-bold text-gray-900">
+                {/* 修正: 文字サイズを調整し、改行タグを削除 */}
+                <h3 className="text-base font-bold text-gray-900 sm:text-lg">
                   Level 2: ドキュメント検索 (RAG)
                 </h3>
                 <p className="mt-2 text-sm text-gray-600">
@@ -303,7 +301,8 @@ export default function ServicePage() {
 
               {/* Level 3 */}
               <div className="rounded-lg border-t-4 border-indigo-600 bg-white p-6 shadow-sm flex flex-col">
-                <h3 className="text-lg font-bold text-gray-900">
+                {/* 修正: 文字サイズを調整 */}
+                <h3 className="text-base font-bold text-gray-900 sm:text-lg">
                   Level 3: データベース連携
                 </h3>
                 <p className="mt-2 text-sm text-gray-600">
@@ -362,7 +361,9 @@ export default function ServicePage() {
                 </p>
               </div>
               <div className="mt-4 flex-shrink-0 sm:mt-0 sm:ml-6">
-                <span className="text-xl font-bold text-gray-900">¥15,000</span>
+                <span className="text-xl font-bold text-gray-900 whitespace-nowrap">
+                  ¥15,000
+                </span>
                 <span className="text-sm text-gray-500"> (税別) / 60分</span>
               </div>
             </div>
@@ -376,7 +377,7 @@ export default function ServicePage() {
                 </p>
               </div>
               <div className="mt-4 flex-shrink-0 sm:mt-0 sm:ml-6">
-                <span className="text-xl font-bold text-gray-900">
+                <span className="text-xl font-bold text-gray-900 whitespace-nowrap">
                   ¥50,000 〜
                 </span>
                 <span className="text-sm text-gray-500"> (税別)</span>
@@ -392,7 +393,7 @@ export default function ServicePage() {
                 </p>
               </div>
               <div className="mt-4 flex-shrink-0 sm:mt-0 sm:ml-6">
-                <span className="text-xl font-bold text-gray-900">
+                <span className="text-xl font-bold text-gray-900 whitespace-nowrap">
                   月額 ¥30,000 〜
                 </span>
                 <span className="text-sm text-gray-500"> (税別)</span>
@@ -406,7 +407,9 @@ export default function ServicePage() {
       <section className="bg-gray-900 py-16 text-white">
         <div className="container mx-auto max-w-4xl px-4">
           <h2 className="mb-8 text-center text-xl font-bold sm:text-2xl">
-            Security & Policy（安心への取り組み）
+            Security & Policy
+            <br className="block sm:hidden" />
+            （安心への取り組み）
           </h2>
           <p className="mb-8 text-center text-gray-400 text-sm sm:text-base">
             企業様のデータを扱うプロフェッショナルとして、以下のポリシーを遵守します。
@@ -446,8 +449,10 @@ export default function ServicePage() {
       {/* 7. CTA */}
       <section className="py-12">
         <div className="container mx-auto max-w-4xl px-4 text-center">
-          <h2 className="mb-6 text-xl font-bold text-black sm:text-2xl">
-            あなたの業務も、自動化できるか診断しませんか？
+          <h2 className="mb-6 text-xl font-bold text-black sm:text-2xl leading-snug">
+            あなたの業務も、
+            <br className="block sm:hidden" />
+            自動化できるか診断しませんか？
           </h2>
           <p className="mb-6 text-sm text-gray-600 sm:text-base">
             現状の業務フローや、連携したいデータの種類をお聞かせください。
