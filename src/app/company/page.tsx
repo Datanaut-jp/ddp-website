@@ -19,7 +19,6 @@ const PageHeader = () => (
         <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
           About Us
         </h1>
-        {/* 指示通り、説明文は削除しました */}
       </div>
     </div>
   </div>
@@ -70,10 +69,10 @@ export default function CompanyPage() {
         <div className="container mx-auto max-w-4xl px-4">
           <ScrollAnimation>
             <div className="text-center">
+              {/* 修正: spanのblock切り替えで確実に改行 */}
               <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-snug">
-                データを羅針盤に、
-                <br className="block sm:hidden" />
-                まだ見ぬ未来へ。
+                <span>データを羅針盤に、</span>
+                <span className="block sm:inline">まだ見ぬ未来へ。</span>
               </h2>
               <div className="mt-8 space-y-6 text-left text-base leading-7 text-gray-700 sm:text-lg sm:leading-9">
                 <p>
