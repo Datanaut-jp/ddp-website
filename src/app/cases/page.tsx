@@ -1,5 +1,4 @@
 import { CTASection } from '@/components/common/CTASection';
-import { SectionTitle } from '@/components/common/SectionTitle';
 import { ScrollAnimation } from '@/components/common/ScrollAnimation';
 
 export default function CasesPage() {
