@@ -15,8 +15,15 @@ export default function CasesPage() {
           </div>
 
           <h1 className="mb-4 text-xl font-bold leading-snug tracking-tight sm:text-2xl md:text-3xl lg:text-4xl">
-            <span className="block">「データなし」の状態から、わずか3日でAI導入。</span>
-            <span className="block">CS対応の工数を月20時間削減し、24時間無人化を実現。</span>
+            {/* 修正ポイント1: モバイルでも改行なし */}
+            <span className="block sm:inline">
+              「データなし」の状態から、わずか3日でAI導入。
+            </span>
+            {/* 修正ポイント2: モバイルで改行 */}
+            <span className="block sm:inline">
+              CS対応の工数を月20時間削減し、
+              <span className="block sm:inline">24時間無人化を実現。</span>
+            </span>
           </h1>
 
           <p className="mx-auto max-w-2xl text-sm leading-[1.7] text-gray-300 sm:text-lg">
@@ -66,8 +73,10 @@ export default function CasesPage() {
             </div>
 
             <div className="mb-4">
+              {/* 修正ポイント3: モバイルで改行 */}
               <h4 className="text-base font-bold text-gray-800 sm:text-lg">
-                「ヒアリングから実装まで数日。ゼロからデータを整備し、迅速にAI化」
+                <span className="block sm:inline">ヒアリングから実装まで数日。</span>
+                <span className="block sm:inline">ゼロからデータを整備し、迅速にAI化</span>
               </h4>
               <p className="mt-2 text-sm leading-[1.75] text-gray-700 sm:text-base">
                 datanautは、AI導入の前段階となる「データ構築」から伴走し、最適な情報設計と高速実装を実現しました。
@@ -117,8 +126,9 @@ export default function CasesPage() {
             </div>
 
             <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-white p-5 shadow-md sm:p-8">
-              <h3 className="mb-4 text-center text-base font-bold text-gray-800 sm:text-xl">
-                「月間20時間以上の工数削減と、24時間対応を同時に実現」
+              {/* 修正ポイント4: 文字サイズを小さくして一行表示 */}
+              <h3 className="mb-4 text-center text-sm sm:text-base font-bold text-gray-800">
+                月間20時間以上の工数削減と、24時間対応を同時に実現
               </h3>
 
               <p className="mb-6 text-center text-xs leading-[1.7] text-gray-600 sm:text-base">
