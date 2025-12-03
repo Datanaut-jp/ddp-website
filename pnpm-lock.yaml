@@ -14,6 +14,9 @@ importers:
       html-react-parser:
         specifier: ^5.2.5
         version: 5.2.6(@types/react@19.1.12)(react@19.1.1)
+      lucide-react:
+        specifier: ^0.555.0
+        version: 0.555.0(react@19.1.1)
       microcms-js-sdk:
         specifier: ^3.2.0
         version: 3.2.0
@@ -2257,6 +2260,11 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
+
+  lucide-react@0.555.0:
+    resolution: {integrity: sha512-D8FvHUGbxWBRQM90NZeIyhAvkFfsh3u9ekrMvJ30Z6gnpBHS6HC6ldLg7tL45hwiIz/u66eKDtdA23gwwGsAHA==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   magic-string@0.30.18:
     resolution: {integrity: sha512-yi8swmWbO17qHhwIBNeeZxTceJMeBvWJaId6dyvTSOwTipqeHhMhOrz6513r1sOKnpvQ7zkhlG8tPrpilwTxHQ==}
@@ -5434,6 +5442,10 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+
+  lucide-react@0.555.0(react@19.1.1):
+    dependencies:
+      react: 19.1.1
 
   magic-string@0.30.18:
     dependencies:
