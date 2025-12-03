@@ -16,7 +16,7 @@ export default function CasesPage() {
 
           <h1 className="mb-4 text-xl font-bold leading-snug tracking-tight sm:text-2xl md:text-3xl lg:text-4xl">
             {/* 修正ポイント1: 改行位置調整 */}
-            <span className="block sm:inline">やはり、「データなし」の状態から、</span>
+            <span className="block sm:inline">「データなし」の状態から、</span>
             <span className="block sm:inline">わずか3日でAI導入。</span>
             {/* 修正ポイント2: モバイルで改行 */}
             <span className="block sm:inline">
