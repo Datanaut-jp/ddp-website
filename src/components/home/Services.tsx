@@ -29,7 +29,7 @@ const ServiceCard = ({
 export const Services = () => {
   return (
     <section className="bg-gray-50 py-16 sm:py-24">
-      <div className="container mx-auto max-w-5xl px-4">
+      <div className="container mx-auto max-w-6xl px-4">
         <div className="text-center">
           <h2 className="text-sm font-bold tracking-widest text-blue-600 uppercase">
             Our Mission
@@ -39,7 +39,7 @@ export const Services = () => {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <ServiceCard
             title="AIエージェント受注開発事業"
             href="/service/dx-support"
