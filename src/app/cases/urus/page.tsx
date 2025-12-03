@@ -15,16 +15,13 @@ export default function CasesPage() {
           </div>
 
           <h1 className="mb-4 text-xl font-bold leading-snug tracking-tight sm:text-2xl md:text-3xl lg:text-4xl">
-            {/* 修正ポイント1: モバイルでも改行なし */}
-            <span className="block sm:inline">
-              「データなし」の状態から、わずか3日でAI導入。
-            </span>
-            {/* 修正ポイント2: モバイルで改行 */}
+            <span className="inline">「データなし」の状態から、わずか3日でAI導入。</span>
             <span className="block sm:inline">
               CS対応の工数を月20時間削減し、
               <span className="block sm:inline">24時間無人化を実現。</span>
             </span>
           </h1>
+
 
           <p className="mx-auto max-w-2xl text-sm leading-[1.7] text-gray-300 sm:text-lg">
             <span className="block">クライアント: 株式会社Urus（広告・CS事業）</span>
