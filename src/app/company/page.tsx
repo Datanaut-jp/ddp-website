@@ -60,6 +60,45 @@ const ProfileTable = () => {
   )
 }
 
+//
+// ▼▼▼ Team Section 追記部分 ▼▼▼
+//
+const TeamSection = () => {
+  const teamItems = [
+    { label: 'Crew', value: '2名' },
+    { label: 'Partner Crew', value: '7名（Engineers / Designers）' },
+  ]
+
+  return (
+    <div className="mt-16 rounded-lg border border-gray-200 bg-white shadow-sm">
+      <div className="px-6 py-8">
+        <h3 className="text-xl font-bold text-gray-900 sm:text-2xl text-center">
+          Team
+        </h3>
+
+        <div className="mt-6 divide-y divide-gray-200">
+          {teamItems.map((item) => (
+            <div
+              className="py-5 sm:grid sm:grid-cols-3 sm:gap-4"
+              key={item.label}
+            >
+              <dt className="text-sm font-bold text-gray-900 sm:text-base">
+                {item.label}
+              </dt>
+              <dd className="mt-1 text-sm text-gray-600 sm:col-span-2 sm:mt-0 sm:text-base">
+                {item.value}
+              </dd>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+//
+// ▼ メインページ
+//
 export default function CompanyPage() {
   return (
     <div>
@@ -69,11 +108,11 @@ export default function CompanyPage() {
         <div className="container mx-auto max-w-4xl px-4">
           <ScrollAnimation>
             <div className="text-center">
-              {/* 修正: spanのblock切り替えで確実に改行 */}
               <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-snug">
                 <span>データを羅針盤に、</span>
                 <span className="block sm:inline">まだ見ぬ未来へ。</span>
               </h2>
+
               <div className="mt-8 space-y-6 text-left text-base leading-7 text-gray-700 sm:text-lg sm:leading-9">
                 <p>
                   Datanaut合同会社のウェブサイトへお越しいただき、誠にありがとうございます。
@@ -106,6 +145,7 @@ export default function CompanyPage() {
                   <br />
                   今後とも、皆様の変わらぬご支援とご指導を賜りますよう、心よりお願い申し上げます。
                 </p>
+
                 <div className="pt-8 text-right font-medium">
                   <p>Datanaut合同会社</p>
                   <p className="mt-1">CEO　橋本 玖都</p>
@@ -116,6 +156,7 @@ export default function CompanyPage() {
         </div>
       </section>
 
+      {/* 会社情報 */}
       <section className="bg-white py-16 sm:py-24">
         <div className="container mx-auto max-w-5xl px-4">
           <ScrollAnimation>
@@ -123,6 +164,11 @@ export default function CompanyPage() {
               会社情報
             </h2>
             <ProfileTable />
+          </ScrollAnimation>
+
+          {/* ▼ Team 追加 */}
+          <ScrollAnimation>
+            <TeamSection />
           </ScrollAnimation>
         </div>
       </section>
