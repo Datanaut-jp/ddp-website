@@ -4,6 +4,10 @@ import { notFound } from 'next/navigation'
 import { ScrollAnimation } from '@/components/common/ScrollAnimation'
 import React from 'react'
 
+export async function generateStaticParams() {
+  return [{ slug: 'dx-support' }, { slug: 'sme-consultant' }]
+}
+
 // アイコンコンポーネント
 const CheckIcon = () => (
   <svg
@@ -23,7 +27,11 @@ const CheckIcon = () => (
 
 const FeatureIcon = ({ number }: { number: number }) => (
   <div className="relative h-12 w-12">
-    <svg className="h-full w-full text-blue-600" fill="none" viewBox="0 0 64 64">
+    <svg
+      className="h-full w-full text-blue-600"
+      fill="none"
+      viewBox="0 0 64 64"
+    >
       <path
         stroke="currentColor"
         strokeWidth="2"
@@ -149,7 +157,9 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
           {/* 「準備中」セクションは dx-support 以外のみ表示 */}
           {slug !== 'dx-support' && (
             <div className="mt-12 flex min-h-[200px] flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-8 text-center">
-              <h3 className="text-xl font-semibold text-gray-900">準備中です</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                準備中です
+              </h3>
               <p className="mt-2 text-gray-500">
                 現在、資料を作成中です。
                 <br />
@@ -170,7 +180,10 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
             <div className="flex justify-center">
               <ul className="mt-8 space-y-4 text-lg text-gray-600">
                 {service.challenges.map((challenge, index) => (
-                  <li key={index} className="flex items-start sm:whitespace-nowrap">
+                  <li
+                    key={index}
+                    className="flex items-start sm:whitespace-nowrap"
+                  >
                     <CheckIcon />
                     <span className="ml-3">{challenge}</span>
                   </li>
@@ -195,10 +208,17 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
             </div>
             <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
               {service.features.map((feature, index) => (
-                <div key={feature.name} className="flex flex-col items-center text-center">
+                <div
+                  key={feature.name}
+                  className="flex flex-col items-center text-center"
+                >
                   <FeatureIcon number={index + 1} />
-                  <h3 className="mt-5 text-xl font-semibold text-gray-900">{feature.name}</h3>
-                  <p className="mt-2 text-base text-gray-600">{feature.description}</p>
+                  <h3 className="mt-5 text-xl font-semibold text-gray-900">
+                    {feature.name}
+                  </h3>
+                  <p className="mt-2 text-base text-gray-600">
+                    {feature.description}
+                  </p>
                 </div>
               ))}
             </div>
@@ -220,13 +240,17 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
                     <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 font-bold text-white">
                       {index + 1}
                     </div>
-                    <p className="mt-2 text-lg font-medium text-gray-800">{step}</p>
+                    <p className="mt-2 text-lg font-medium text-gray-800">
+                      {step}
+                    </p>
                   </li>
                   {index < steps.length - 1 && (
                     <li className="hidden flex-1 items-center sm:flex">
                       <div className="relative w-full">
                         <div className="w-full border-b-2 border-gray-300"></div>
-                        <div className="absolute top-1/2 -right-2 -translate-y-1/2 text-gray-300">▶</div>
+                        <div className="absolute top-1/2 -right-2 -translate-y-1/2 text-gray-300">
+                          ▶
+                        </div>
                       </div>
                     </li>
                   )}
