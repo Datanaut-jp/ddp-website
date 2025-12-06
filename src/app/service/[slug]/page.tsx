@@ -170,7 +170,7 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
             <div className="flex justify-center">
               <ul className="mt-8 space-y-4 text-lg text-gray-600">
                 {service.challenges.map((challenge, index) => (
-                  <li key={index} className="flex items-start whitespace-nowrap">
+                  <li key={index} className="flex items-start sm:whitespace-nowrap">
                     <CheckIcon />
                     <span className="ml-3">{challenge}</span>
                   </li>

@@ -35,7 +35,8 @@ export const Services = () => {
             Our Mission
           </h2>
           <p className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            あなたの航海を成功に導く支援
+            <span className="block sm:inline">あなたの航海を</span>
+            <span className="block sm:inline">成功に導く支援</span>
           </p>
         </div>
 
