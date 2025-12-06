@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 import { ScrollAnimation } from '@/components/common/ScrollAnimation'
 import React from 'react'
 
+export const dynamicParams = false
+
 export async function generateStaticParams() {
   return [{ slug: 'dx-support' }, { slug: 'sme-consultant' }]
 }
