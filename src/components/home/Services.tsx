@@ -29,35 +29,41 @@ const ServiceCard = ({
 export const Services = () => {
   return (
     <section className="bg-gray-50 py-16 sm:py-24">
-      <div className="container mx-auto max-w-5xl px-4">
+      <div className="container mx-auto max-w-6xl px-4">
         <div className="text-center">
           <h2 className="text-sm font-bold tracking-widest text-blue-600 uppercase">
             Our Mission
           </h2>
           <p className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            あなたの航海を成功に導く支援
+            <span className="block sm:inline">あなたの航海を</span>
+            <span className="block sm:inline">成功に導く支援</span>
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <ServiceCard
-            title="AI活用とデータ整備による業務自動化支援"
+            title="AIエージェント受注開発事業"
             href="/service/dx-support"
           >
-            SFAやMAといったITツールの価値を分かりやすくお伝えし、選定から導入、定着までをワンストップで支援。抜本的な業務効率化を実現します。
+            個別要件に合わせて、AIエージェントやAIシステムをカスタム開発。業務適応型のAIを短期間で提供します。
+          </ServiceCard>
+          <ServiceCard
+            title="AI導入 / 業務効率化事業"
+            href="/service/dx-support"
+          >
+            業務フローを分解し、自動化可能な領域をAIとデータで最適化。工数削減と品質向上を同時に実現します。
           </ServiceCard>
           <ServiceCard
             title="中小企業診断士事務所"
             href="/service/sme-consultant"
           >
-            IT導入やDX推進に活用できる最適な補助金・助成金をご提案。複雑な申請手続きも専門家としてサポートし、お客様の投資負担を軽減します。
+            経営課題の整理から補助金活用、成長戦略の策定まで。専門的な視点で伴走支援を行います。
           </ServiceCard>
         </div>
 
         <div className="mt-16 text-center">
           <a
             href="/contact"
-            // ↓↓↓ このボタンのクラス名を、ご提示のデザインに修正しました ↓↓↓
             className="rounded-lg border-2 border-blue-500 bg-blue-50 px-8 py-3 text-base font-semibold text-blue-600 transition-all duration-300 ease-out hover:bg-blue-100 hover:shadow-lg"
           >
             航海（ビジネス）の相談をする

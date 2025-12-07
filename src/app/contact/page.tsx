@@ -29,15 +29,17 @@ const PageHeader = () => (
 // Googleフォーム埋め込みコンポーネント
 const GoogleForm = () => {
   return (
-    <div className="w-full">
+    <div className="w-full flex justify-center">
       <iframe
+        // ★ここにGoogleフォームのURLが入っているか確認してください
         src="https://docs.google.com/forms/d/e/1FAIpQLSfMQBwcSVN0ZIjrOCEGxLaLmqU-kaF0EWJdTpBDMkMm2nOUIA/viewform?embedded=true"
-        width="640"
-        height="1449"
-        frameBorder="0"
-        marginHeight={0}
+        width="100%" // 幅を100%にして親要素に合わせる
+        height="1800"
+        frameBorder="0" 
+        marginHeight={0} 
         marginWidth={0}
         className="w-full"
+        title="Datanaut お問い合わせフォーム"
       >
         読み込んでいます…
       </iframe>
@@ -49,10 +51,12 @@ export default function ContactPage() {
   return (
     <div className="bg-gray-100">
       <PageHeader />
-      <div className="py-16 sm:py-24">
-        <div className="container mx-auto max-w-2xl px-4">
+      <div className="py-8 sm:py-24">
+        {/* ▼ 修正箇所：max-w-4xl に広げ、スマホ時の横余白(px)を削除 */}
+        <div className="container mx-auto max-w-4xl px-0 sm:px-4">
           <ScrollAnimation>
-            <div className="rounded-2xl bg-white p-6 shadow-2xl sm:p-10">
+            {/* ▼ 修正箇所：スマホ時の内側余白(p)を0にし、PC時だけ余白をつける */}
+            <div className="rounded-none sm:rounded-2xl bg-white p-0 sm:p-10 shadow-none sm:shadow-2xl overflow-hidden">
               <GoogleForm />
             </div>
           </ScrollAnimation>

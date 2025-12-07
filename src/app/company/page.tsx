@@ -14,14 +14,11 @@ const PageHeader = () => (
         quality={90}
       />
     </div>
-    <div className="relative isolate py-16 sm:py-24">
+    <div className="relative isolate py-24 sm:py-32">
       <div className="container mx-auto max-w-5xl px-4 text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
           About Us
         </h1>
-        <p className="mt-4 text-xl text-gray-300">
-          Datanautの基本情報と、私たちの想いをご紹介します。
-        </p>
       </div>
     </div>
   </div>
@@ -50,8 +47,10 @@ const ProfileTable = () => {
             className="px-6 py-5 sm:grid sm:grid-cols-3 sm:gap-4"
             key={item.term}
           >
-            <dt className="text-base font-medium text-gray-900">{item.term}</dt>
-            <dd className="mt-1 text-base leading-7 text-gray-600 sm:col-span-2 sm:mt-0">
+            <dt className="text-sm font-bold text-gray-900 sm:text-base">
+              {item.term}
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-600 sm:col-span-2 sm:mt-0 sm:text-base sm:leading-7">
               {item.description}
             </dd>
           </div>
@@ -61,41 +60,95 @@ const ProfileTable = () => {
   )
 }
 
+//
+// ▼▼▼ Team Section 追記部分 ▼▼▼
+//
+const TeamSection = () => {
+  const teamItems = [
+    { label: 'Crew', value: '2名' },
+    { label: 'Partner Crew', value: '7名（Engineers / Designers）' },
+  ]
+
+  return (
+    <div className="mt-16 rounded-lg border border-gray-200 bg-white shadow-sm">
+      <div className="px-6 py-8">
+        <h3 className="text-xl font-bold text-gray-900 sm:text-2xl text-center">
+          Team
+        </h3>
+
+        <div className="mt-6 divide-y divide-gray-200">
+          {teamItems.map((item) => (
+            <div
+              className="py-5 sm:grid sm:grid-cols-3 sm:gap-4"
+              key={item.label}
+            >
+              <dt className="text-sm font-bold text-gray-900 sm:text-base">
+                {item.label}
+              </dt>
+              <dd className="mt-1 text-sm text-gray-600 sm:col-span-2 sm:mt-0 sm:text-base">
+                {item.value}
+              </dd>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+//
+// ▼ メインページ
+//
 export default function CompanyPage() {
   return (
     <div>
       <PageHeader />
 
-      <section className="bg-gradient-to-r from-white to-blue-50 py-24 sm:py-32">
+      <section className="bg-gradient-to-r from-white to-blue-50 py-16 sm:py-32">
         <div className="container mx-auto max-w-4xl px-4">
           <ScrollAnimation>
             <div className="text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                データを羅針盤に、まだ見ぬ未来へ。
+              <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl leading-snug">
+                <span>データを羅針盤に、</span>
+                <span className="block sm:inline">まだ見ぬ未来へ。</span>
               </h2>
-              <div className="mt-8 space-y-6 text-left text-lg leading-9 text-gray-700">
+
+              <div className="mt-8 space-y-6 text-left text-base leading-7 text-gray-700 sm:text-lg sm:leading-9">
                 <p>
                   Datanaut合同会社のウェブサイトへお越しいただき、誠にありがとうございます。
                 </p>
-                <p>CEOの橋本 玖都です。</p>
+                <p className="font-bold">CEOの橋本 玖都です。</p>
                 <p>
-                  情報が溢れる現代社会。多くの企業が、“膨大なデータという『宝の山』”を前に、その活用法を見出せずにいます。私たちは、使われずに眠るデータに意味と解釈を与え、持続的な改善と判断を支える仕組みへと昇華させたい。その一つの熱い想いを原動力に、Datanaut合同会社を創業いたしました。
+                  情報が溢れる現代社会。多くの企業が、“膨大なデータという『宝の山』”を前に、その活用法を見出せずにいます。
+                  <br className="hidden sm:block" />
+                  私たちは、使われずに眠るデータに意味と解釈を与え、持続的な改善と判断を支える仕組みへと昇華させたい。その一つの熱い想いを原動力に、Datanaut合同会社を創業いたしました。
                 </p>
                 <p>
-                  私たちの使命は、単なるデータ分析ではありません。予測のつかないビジネスの大海原を進むすべての挑戦者に、最高精度の羅針盤としてデータを届けること。それこそが、私たちの存在意義です。
+                  私たちの使命は、単なるデータ分析ではありません。
+                  <br className="hidden sm:block" />
+                  予測のつかないビジネスの大海原を進むすべての挑戦者に、最高精度の羅針盤としてデータを届けること。それこそが、私たちの存在意義です。
                 </p>
                 <p>
-                  勘や経験だけに頼るのではなく、客観的なデータに基づいた確かな一手で未来を切り拓く。そのために私たちは、多様なビジネスの現場の悩みに正面から向き合い、最適な道を一緒に探していきます。それは単なるツール提供では終わらせない。お客様の挑戦に寄り添い、成功まで伴走すること。それが私たちのスタンスです。
+                  勘や経験だけに頼るのではなく、客観的なデータに基づいた確かな一手で未来を切り拓く。
+                  <br className="hidden sm:block" />
+                  そのために私たちは、多様なビジネスの現場の悩みに正面から向き合い、最適な道を一緒に探していきます。それは単なるツール提供では終わらせない。お客様の挑戦に寄り添い、成功まで伴走すること。それが私たちのスタンスです。
                 </p>
                 <p>
-                  データが指し示す先には、私たちがまだ見ぬビジネスチャンスが、そして想像するだけでワクワクするような未来が広がっています。私たちはデータの力で人や組織の持つ力を最大限に活かし、誰もが自信を持って未来へ一歩を踏み出せる社会を創造します。
+                  データが指し示す先には、私たちがまだ見ぬビジネスチャンスが、そして想像するだけでワクワクするような未来が広がっています。
+                  <br className="hidden sm:block" />
+                  私たちはデータの力で人や組織の持つ力を最大限に活かし、誰もが自信を持って未来へ一歩を踏み出せる社会を創造します。
                 </p>
                 <p>
-                  この信念を胸に、私たちは挑戦を止めません。常識を打ち破り、未来を切り拓くdatanautの航海に、どうぞご期待ください。今後とも、皆様の変わらぬご支援とご指導を賜りますよう、心よりお願い申し上げます。
+                  この信念を胸に、私たちは挑戦を止めません。
+                  <br className="hidden sm:block" />
+                  常識を打ち破り、未来を切り拓くdatanautの航海に、どうぞご期待ください。
+                  <br />
+                  今後とも、皆様の変わらぬご支援とご指導を賜りますよう、心よりお願い申し上げます。
                 </p>
-                <div className="pt-6 text-right">
+
+                <div className="pt-8 text-right font-medium">
                   <p>Datanaut合同会社</p>
-                  <p>CEO　橋本 玖都</p>
+                  <p className="mt-1">CEO　橋本 玖都</p>
                 </div>
               </div>
             </div>
@@ -103,13 +156,19 @@ export default function CompanyPage() {
         </div>
       </section>
 
+      {/* 会社情報 */}
       <section className="bg-white py-16 sm:py-24">
         <div className="container mx-auto max-w-5xl px-4">
           <ScrollAnimation>
-            <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
+            <h2 className="text-center text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
               会社情報
             </h2>
             <ProfileTable />
+          </ScrollAnimation>
+
+          {/* ▼ Team 追加 */}
+          <ScrollAnimation>
+            <TeamSection />
           </ScrollAnimation>
         </div>
       </section>
