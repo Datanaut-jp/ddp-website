@@ -1,8 +1,11 @@
+export const dynamicParams = false;
+
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { client } from '@/libs/microcms';
 import { format } from 'date-fns';
 import parse from 'html-react-parser';
+
 
 // --- ▼ 1. 修正箇所 ▼ ---
 // 共通の型定義をインポート

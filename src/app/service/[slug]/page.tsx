@@ -1,10 +1,10 @@
+export const dynamicParams = false
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { ScrollAnimation } from '@/components/common/ScrollAnimation'
 import React from 'react'
-
-export const dynamicParams = false
 
 export async function generateStaticParams() {
   return [{ slug: 'dx-support' }, { slug: 'sme-consultant' }]
@@ -115,11 +115,14 @@ const servicesData: { [key: string]: Service } = {
 }
 
 interface ServiceDetailPageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
-export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
-  const slug = params.slug
+export default async function ServiceDetailPage({
+  params,
+}: ServiceDetailPageProps) {
+  const { slug } = await params
+
   const service = servicesData[slug]
 
   if (!service) notFound()
