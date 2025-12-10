@@ -1,8 +1,51 @@
 'use client'
 
 import Script from 'next/script'
+import { useEffect } from 'react'
+
+// 1. windowオブジェクトの型を拡張して定義（anyを使わないための工夫）
+interface WindowWithTally extends Window {
+  TallyConfig?: {
+    formId: string
+    popup: {
+      width: number
+      emoji: {
+        text: string
+        animation: string
+      }
+      autoClose: number
+    }
+  }
+  Tally?: {
+    loadEmbeds: () => void
+  }
+}
 
 export default function MonitorPage() {
+  // 2. ページが表示されたら設定を読み込ませる
+  useEffect(() => {
+    // windowを拡張した型として扱う
+    const w = window as unknown as WindowWithTally
+
+    // Tallyの設定を注入
+    w.TallyConfig = {
+      formId: 'jaejO9',
+      popup: {
+        width: 450,
+        emoji: {
+          text: '👋',
+          animation: 'wave',
+        },
+        autoClose: 1000,
+      },
+    }
+
+    // すでにスクリプトが読み込まれている場合（ページ遷移時など）は再読み込みを実行
+    if (w.Tally) {
+      w.Tally.loadEmbeds()
+    }
+  }, [])
+
   return (
     <>
       <style jsx global>{`
@@ -1338,38 +1381,16 @@ export default function MonitorPage() {
         </footer>
 
         {/* Tally Embed Code */}
-        <Script
-          id="tally-js"
-          src="https://tally.so/widgets/embed.js"
+        {/* スクリプト読み込み: TallyConfigはuseEffectで設定済み */}
+        <Script 
+          id="tally-js" 
+          src="https://tally.so/widgets/embed.js" 
+          strategy="afterInteractive"
           onLoad={() => {
-            // ここでTallyConfigの型を定義します（anyを使わない方法）
-            type TallyWindow = Window & {
-              TallyConfig: {
-                formId: string
-                popup: {
-                  width: number
-                  emoji: {
-                    text: string
-                    animation: string
-                  }
-                  autoClose: number
-                }
-              }
-            }
-
-            // windowを一度unknownにしてから、定義した型に変換します
-            const w = window as unknown as TallyWindow
-            
-            w.TallyConfig = {
-              formId: 'jaejO9',
-              popup: {
-                width: 450,
-                emoji: {
-                  text: '👋',
-                  animation: 'wave',
-                },
-                autoClose: 1000,
-              },
+            // スクリプトが読み込まれた直後に再チェック
+            const w = window as unknown as WindowWithTally
+            if (w.Tally) {
+              w.Tally.loadEmbeds()
             }
           }}
         />
