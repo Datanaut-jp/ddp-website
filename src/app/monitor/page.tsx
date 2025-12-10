@@ -3,7 +3,7 @@
 import Script from 'next/script'
 import { useEffect } from 'react'
 
-// 1. windowオブジェクトの型を拡張して定義（anyを使わないための工夫）
+// 1. windowオブジェクトの型を拡張して定義（オプションを追加）
 interface WindowWithTally extends Window {
   TallyConfig?: {
     formId: string
@@ -13,6 +13,12 @@ interface WindowWithTally extends Window {
         text: string
         animation: string
       }
+      // ↓↓↓ ここを追加（表示タイミングの設定） ↓↓↓
+      open?: {
+        trigger: 'scroll'
+        scrollPercent: number
+      }
+      // ↑↑↑ ここまで ↑↑↑
       autoClose: number
     }
   }
@@ -24,7 +30,6 @@ interface WindowWithTally extends Window {
 export default function MonitorPage() {
   // 2. ページが表示されたら設定を読み込ませる
   useEffect(() => {
-    // windowを拡張した型として扱う
     const w = window as unknown as WindowWithTally
 
     // Tallyの設定を注入
@@ -36,11 +41,17 @@ export default function MonitorPage() {
           text: '👋',
           animation: 'wave',
         },
+        // ↓↓↓ ここを追加（50%スクロールで表示） ↓↓↓
+        open: {
+          trigger: 'scroll',
+          scrollPercent: 50
+        },
+        // ↑↑↑ ここまで ↑↑↑
         autoClose: 1000,
       },
     }
 
-    // すでにスクリプトが読み込まれている場合（ページ遷移時など）は再読み込みを実行
+    // すでにスクリプトが読み込まれている場合は再読み込み
     if (w.Tally) {
       w.Tally.loadEmbeds()
     }
@@ -49,20 +60,21 @@ export default function MonitorPage() {
   return (
     <>
       <style jsx global>{`
+        /* ... CSSは前回と同じなので省略しません（コピペ用に全文載せます） ... */
         :root {
           /* Color Palette */
-          --primary-color: #2563EB; /* Modern Blue - Trust */
+          --primary-color: #2563EB;
           --primary-dark: #1E40AF;
           --primary-light: #EFF6FF;
 
           /* Accent Colors */
-          --accent-orange: #F97316; /* Vibrant Orange - Action/Attention */
-          --accent-cyan: #06B6D4;   /* Tech Cyan - AI/Future */
-          --accent-red: #EF4444;    /* Alert Red */
+          --accent-orange: #F97316;
+          --accent-cyan: #06B6D4;
+          --accent-red: #EF4444;
 
-          --text-main: #111827; /* Deep Black */
-          --text-sub: #4B5563;  /* Gray Text */
-          --bg-gray: #F9FAFB;   /* Very Light Gray */
+          --text-main: #111827;
+          --text-sub: #4B5563;
+          --bg-gray: #F9FAFB;
           --bg-white: #FFFFFF;
           --border-color: #E5E7EB;
 
@@ -73,12 +85,11 @@ export default function MonitorPage() {
           /* Effects */
           --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
           --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-          --shadow-lg: 0 10px 15px -3px rgba(37, 99, 235, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Blue-ish shadow */
+          --shadow-lg: 0 10px 15px -3px rgba(37, 99, 235, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
           --radius-md: 12px;
           --radius-lg: 16px;
         }
 
-        /* Reset Box Sizing */
         *, *::before, *::after {
           box-sizing: border-box;
         }
@@ -93,7 +104,6 @@ export default function MonitorPage() {
           -webkit-font-smoothing: antialiased;
         }
 
-        /* Utilities */
         .container {
           max-width: var(--container-width);
           margin: 0 auto;
@@ -107,14 +117,11 @@ export default function MonitorPage() {
           background-image: radial-gradient(#E5E7EB 1px, transparent 1px);
           background-size: 20px 20px;
         }
-        /* PCでは文節改行、スマホでは解除 */
         .ib { display: inline-block; }
 
-        /* Typography */
         h1, h2, h3 { line-height: 1.3; margin-top: 0; letter-spacing: -0.02em; }
         h2 { font-size: 2rem; margin-bottom: 2rem; position: relative; display: inline-block; max-width: 800px; }
 
-        /* Buttons - Enhanced */
         .btn {
           display: inline-flex;
           align-items: center;
@@ -160,7 +167,6 @@ export default function MonitorPage() {
           letter-spacing: 0.05em;
         }
 
-        /* 1. Hero Section */
         .hero {
           padding: 100px 0 80px;
           background: radial-gradient(circle at 50% 0%, #EFF6FF 0%, #fff 70%);
@@ -203,7 +209,6 @@ export default function MonitorPage() {
           gap: 24px;
         }
 
-        /* 2. Integrations */
         .integrations-wrapper {
           max-width: 900px;
           margin: 0 auto;
@@ -248,7 +253,6 @@ export default function MonitorPage() {
           flex-shrink: 0;
         }
 
-        /* 3. Problems */
         .problem-list {
           list-style: none;
           padding: 0;
@@ -276,7 +280,6 @@ export default function MonitorPage() {
           flex-shrink: 0;
         }
 
-        /* 4. Solution */
         .solution-grid {
           display: grid;
           gap: 24px;
@@ -346,7 +349,6 @@ export default function MonitorPage() {
           margin-bottom: 0;
         }
 
-        /* 5. Case Study */
         .case-card { margin-bottom: 80px; }
         .case-header {
           color: var(--accent-cyan);
@@ -446,7 +448,6 @@ export default function MonitorPage() {
           height: 20px;
         }
 
-        /* 6. Voice */
         .voice-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -468,7 +469,6 @@ export default function MonitorPage() {
         }
         .stars svg { width: 18px; height: 18px; fill: currentColor; }
 
-        /* 7. Pricing */
         .price-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -526,7 +526,6 @@ export default function MonitorPage() {
         .price-main span { font-size: 1rem; font-weight: 500; color: var(--text-sub); margin-left: 4px; letter-spacing: 0; }
         .price-desc { flex-grow: 1; margin-bottom: 32px; color: var(--text-sub); font-size: 0.95rem; }
 
-        /* 8. Last CTA */
         .last-cta {
           background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
           color: white;
@@ -555,12 +554,10 @@ export default function MonitorPage() {
           border-color: white;
         }
 
-        /* SVG Icons Helper */
         .icon-sm { width: 18px; height: 18px; }
         .icon-md { width: 24px; height: 24px; }
         .icon-lg { width: 32px; height: 32px; }
 
-        /* Mobile Tweaks */
         @media (max-width: 768px) {
           .hero h1 { font-size: 1.8rem; line-height: 1.4; }
           .ib { display: inline; }
