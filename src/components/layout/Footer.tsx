@@ -9,18 +9,18 @@ export const Footer = () => {
       <div className="container mx-auto px-4 py-10">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           
-          {/* ロゴ部分（①構成）＋ ②のフォントサイズ・ロゴサイズ */}
+          {/* ロゴ部分 */}
           <div className="col-span-2 space-y-4 md:col-span-1">
             <Image
               src="/images/logo-full-white.svg"
               alt="Datanaut ロゴ"
-              width={160}      // ←②のサイズ
-              height={36}      // ←②のサイズ
+              width={160}
+              height={36}
             />
             <p className="text-base text-gray-400">-データ宇宙の航海士たち-</p>
           </div>
 
-          {/* Menu（①構成）＋ ②フォントサイズ反映 */}
+          {/* Menu */}
           <div>
             <h3 className="font-semibold tracking-wider text-gray-300 uppercase mb-4 text-base">
               Menu
@@ -34,7 +34,7 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Resources（①構成）＋ ②フォントサイズ反映 */}
+          {/* Resources */}
           <div>
             <h3 className="font-semibold tracking-wider text-gray-300 uppercase mb-4 text-base">
               Resources
@@ -46,7 +46,7 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Support（①構成：セキュリティ含む）＋ ②フォントサイズ反映 */}
+          {/* Support */}
           <div>
             <h3 className="font-semibold tracking-wider text-gray-300 uppercase mb-4 text-base">
               Support
@@ -55,11 +55,13 @@ export const Footer = () => {
               <li><Link href="/privacy" className="text-gray-400 transition-colors hover:text-white">プライバシーポリシー</Link></li>
               <li><Link href="/terms" className="text-gray-400 transition-colors hover:text-white">利用規約</Link></li>
               <li><Link href="/security" className="text-gray-400 transition-colors hover:text-white">セキュリティ</Link></li>
+              {/* ↓↓↓ 追加 ↓↓↓ */}
+              <li><Link href="/law" className="text-gray-400 transition-colors hover:text-white">特定商取引法</Link></li>
             </ul>
           </div>
         </div>
 
-        {/* コピーライト（①構成）＋ ②の文字サイズ (text-sm) */}
+        {/* コピーライト */}
         <div className="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
           <p>&copy; {currentYear} Datanaut. All Rights Reserved.</p>
         </div>
