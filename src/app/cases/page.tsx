@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { CTASection } from '@/components/common/CTASection'
 import { ScrollAnimation } from '@/components/common/ScrollAnimation'
 
@@ -20,20 +21,42 @@ export default function CasesPage() {
           <div className="grid gap-8 md:grid-cols-2">
             {/* 株式会社Urus様の事例カード */}
             <ScrollAnimation>
-              <Link href="/cases/urus" className="group block h-full">
-                <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-lg">
+              <Link href="/cases/urus" className="block h-full">
+                <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-2xl">
+                  
+                  {/* ヘッダー */}
                   <div className="bg-blue-600 px-6 py-8 text-white">
-                    <p className="mb-2 text-xs font-semibold tracking-wider text-blue-100 uppercase">
-                      株式会社Urus 様
-                    </p>
-                    <h2 className="text-xl font-bold decoration-2 underline-offset-4 group-hover:underline">
-                      24時間対応AIチャットボット導入
-                    </h2>
+                    <div className="flex items-start sm:items-center gap-4">
+                      
+                      {/* ロゴ */}
+                      <div className="relative h-12 w-12 shrink-0">
+                        <Image
+                          src="/images/urus-logo.png"
+                          alt="Urus Logo"
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+
+                      {/* テキスト */}
+                      <div className="flex flex-col text-left">
+                        <p className="text-xs font-semibold tracking-wider whitespace-nowrap text-blue-100">
+                          株式会社URUS 様
+                        </p>
+                        <h2 className="text-xl font-bold whitespace-nowrap">
+                          24時間対応AIチャットボット導入
+                        </h2>
+                      </div>
+
+                    </div>
                   </div>
+
+                  {/* 本文 */}
                   <div className="flex flex-grow flex-col p-6">
                     <p className="mb-4 line-clamp-3 flex-grow text-sm leading-relaxed text-gray-600">
-                      「データなし」の状態から、わずか3日でAI導入。CS対応の工数を月20時間削減し、24時間無人化を実現。
+                      「データなし」の状態から、わずか3日でAI導入。CS対応の工数を月20時間削減し、24時間無人化を実現。タイムラグによるCX悪化と暗黙知の課題を、RAG技術で解決しました。
                     </p>
+
                     <div className="mt-auto border-t border-gray-100 pt-4">
                       <span className="flex items-center text-sm font-semibold text-blue-600">
                         詳しく見る
@@ -54,6 +77,7 @@ export default function CasesPage() {
                       </span>
                     </div>
                   </div>
+
                 </article>
               </Link>
             </ScrollAnimation>
@@ -62,6 +86,7 @@ export default function CasesPage() {
           </div>
         </div>
       </div>
+
       <CTASection />
     </div>
   )
